@@ -55,14 +55,14 @@ const UserSchema = new mongoose.Schema(
 
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 
-UserSchema.pre(["save", "update"], function (next) {
+UserSchema.pre(["save", "updateOne"], function (next) {
   const data = this?._update || this;
   const isEmailValidated = data.email
     ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)
     : true;
 
   if (isEmailValidated) {
-    if (data.password) {
+    if (data?.password) {
       const isPasswordValidated =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,:;_+/-]).{8,}$/.test(
           data.password

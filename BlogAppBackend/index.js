@@ -6,6 +6,9 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
+require("express-async-errors");
+
+
 //SessionCookies
 
 const session = require("cookie-session");
@@ -25,9 +28,9 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 app.all("/", (req, res) => {
   res.send("Running!!!");
 });
-app.use("/user", require("./src/routes/userRoute"));
+app.use("/user", require("./src/routes/user"));
 
-app.use("/blogs", require("./src/routes/blogRoute"));
+app.use("/blogs", require("./src/routes/blog"));
 
 //Synchronization
 //require("./src/sync")()
