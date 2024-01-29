@@ -4,22 +4,34 @@ const express = require("express");
 const app = express();
 
 require("dotenv").config();
-const HOST = process.env?.HOST || "127.0.0.1";
-const PORT = process.env?.PORT || 8000;
+const PORT = process.env.PORT || 8000;
 
-//error handler for async errors
-require("express-async-errors");
+//SessionCookies
 
-// Connect to DB:
-const { dbConnection } = require("./src/configs/dbConnection");
-dbConnection();
+const session = require("cookie-session");
+app.use(
+  session({
+    secret: process.env.SECRET_KEY || "secret_keys_for_cookies",
+  })
+);
 
-//Accept JSON
 app.use(express.json());
 
-//routes
-app.get("/", (req, res) => res.send("Hello World!"));
-app.use(require("./src/routes"));
-//error handler
-app.use(require("./src/middlewares/errorHandler"));
-app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
+require("./src/dbconnection");
+
+app.use(require('./src/middlewares/findSearchSortPage')) 
+
+//deneme
+app.all("/", (req, res) => {
+  res.send("Running!!!");
+});
+app.use("/user", require("./src/routes/userRoute"));
+
+app.use("/blogs", require("./src/routes/blogRoute"));
+
+//Synchronization
+//require("./src/sync")()
+
+app.use(require("./src/errorHandler"));
+
+app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
