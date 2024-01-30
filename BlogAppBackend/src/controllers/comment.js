@@ -16,21 +16,22 @@ module.exports = {
                </ul>
            `
        */
-   const data = await req.getModelList(Comment);
- },
+    const data = await req.getModelList(Comment);
+  },
   create: async (req, res) => {
-     /*
+    /*
             #swagger.tags = ["Comments"]
-            #swagger.summary = "Update Comment"
+            #swagger.summary = "Create Comment"
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-                schema: {         
-                     "content": "...comment",
-                     "author": "user_id",
-                     "blog_id": "blog_id",
-                     }
+                schema: {
+                    "content": "...comment...",
+                    "author": "user_id",
+                    "blog_id": "blog_id",
+
                 }
+            }
         */
     const data = await Comment.create(req.body);
     res.status(201).send({
@@ -40,18 +41,19 @@ module.exports = {
     });
   },
   update: async (req, res) => {
-    /*
+  /*
             #swagger.tags = ["Comments"]
             #swagger.summary = "Update Comment"
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-                schema: {         
-                     "content": "...comment",
-                     "author": "user_id",
-                     "blog_id": "blog_id",
-                     }
+                schema: {
+                    "content": "...comment...",
+                    "author": "user_id",
+                    "blog_id": "blog_id",
+
                 }
+            }
         */
     const data = await Comment.updateOne({ _id: req.params.id }, req.body);
     res.status(202).send({

@@ -39,7 +39,7 @@
     "application/json"
   ],
   "paths": {
-    "/user/": {
+    "/users/": {
       "get": {
         "tags": [
           "Users"
@@ -74,14 +74,45 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "is_staff": {
-                  "example": "any"
+                "user_name": {
+                  "type": "string",
+                  "example": "test"
                 },
-                "is_superadmin": {
-                  "example": "any"
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "...url..."
+                },
+                "bio": {
+                  "type": "string",
+                  "example": "I am ..."
+                },
+                "is_active": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "is_admin": {
+                  "type": "boolean",
+                  "example": false
                 }
               }
             }
@@ -94,7 +125,7 @@
         }
       }
     },
-    "/user/{id}": {
+    "/users/{id}": {
       "get": {
         "tags": [
           "Users"
@@ -137,6 +168,52 @@
             "name": "sort",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "...url..."
+                },
+                "bio": {
+                  "type": "string",
+                  "example": "I am ..."
+                },
+                "is_active": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "is_admin": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -162,6 +239,52 @@
             "name": "sort",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "...url..."
+                },
+                "bio": {
+                  "type": "string",
+                  "example": "I am ..."
+                },
+                "is_active": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "is_admin": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -230,6 +353,38 @@
             "name": "sort",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "...title..."
+                },
+                "content": {
+                  "type": "string",
+                  "example": "...content..."
+                },
+                "status": {
+                  "type": "array",
+                  "example": [
+                    "p",
+                    "d"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "author": {
+                  "type": "string",
+                  "example": "user_id"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -282,6 +437,32 @@
             "name": "sort",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "...title..."
+                },
+                "content": {
+                  "type": "string",
+                  "example": "...content..."
+                },
+                "status": {
+                  "type": "string",
+                  "example": "p"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "user_id"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -307,6 +488,32 @@
             "name": "sort",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "...title..."
+                },
+                "content": {
+                  "type": "string",
+                  "example": "...content..."
+                },
+                "status": {
+                  "type": "string",
+                  "example": "p"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "user_id"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -320,6 +527,379 @@
           "Blogs"
         ],
         "summary": "Delete Blog",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/categories/": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "List Categories",
+        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Create Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "...category name..."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Get Single Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Update Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "...category name..."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Update Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "...category name..."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Delete Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/comments/": {
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "List Comments",
+        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Create Comment",
+        "description": "",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "example": "...comment..."
+                },
+                "author": {
+                  "type": "string",
+                  "example": "user_id"
+                },
+                "blog_id": {
+                  "type": "string",
+                  "example": "blog_id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Update Comment",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "example": "...comment..."
+                },
+                "author": {
+                  "type": "string",
+                  "example": "user_id"
+                },
+                "blog_id": {
+                  "type": "string",
+                  "example": "blog_id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Update Comment",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "example": "...comment..."
+                },
+                "author": {
+                  "type": "string",
+                  "example": "user_id"
+                },
+                "blog_id": {
+                  "type": "string",
+                  "example": "blog_id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Delete Comment",
         "description": "",
         "parameters": [
           {

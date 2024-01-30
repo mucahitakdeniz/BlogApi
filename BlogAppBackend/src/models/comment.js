@@ -3,12 +3,12 @@
 const mongoose = require("mongoose");
 /* ------------------------------------------------------- *
 {
-    "content": "...comment",
+    "content": "...comment...",
     "author": "user_id",
     "blog_id": "blog_id",
 }
  ------------------------------------------------------- */
-// Category Model:
+// Comment Model:
 
 const CommentSchema = new mongoose.Schema(
   {

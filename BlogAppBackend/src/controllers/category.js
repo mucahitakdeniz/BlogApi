@@ -23,17 +23,17 @@ module.exports = {
     });
   },
   create: async (req, res) => {
-    /*
-            #swagger.tags = ["Categries"]
+ /*
+            #swagger.tags = ["Categories"]
             #swagger.summary = "Create Category"
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-                schema: {         
-                     "name": "Magezine 
-                     ",
-                     }
+                schema: {
+                    "name": "...category name...",
+
                 }
+            }
         */
     const data = await Category.create(req.body);
     res.status(201).send({
@@ -55,16 +55,17 @@ module.exports = {
   },
   update: async (req, res) => {
     /*
-            #swagger.tags = ["Categries"]
+            #swagger.tags = ["Categories"]
             #swagger.summary = "Update Category"
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-                schema: {         
-                     "name": "Magezine 
-                     ",
-                     }
+                schema: {
+                    "name": "...category name...",
+
+
                 }
+            }
         */
     const data = await Category.updateOne({ _id: req.params.id }, req.body);
     res.status(202).send({
@@ -76,8 +77,8 @@ module.exports = {
   },
   delete: async (req, res) => {
     /*
-            #swagger.tags = ["Blogs"]
-            #swagger.summary = "Delete Blog"
+            #swagger.tags = ["Categories"]
+            #swagger.summary = "Delete Category"
         */
     const data = await Category.deleteOne({ _id: req.params.id });
 

@@ -26,16 +26,13 @@ module.exports = {
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-                schema: {         
-                     "title": " Title",
-                     "content": "...content... ",
-                     "status": "p",
-                     "author": "test",
-                     "likes_n": ["test","admin",....],
-                     "likes": 28
-                     "post_views": 45,
-                     }
+                schema: {
+                    "title": "...title...",
+                    "content": "...content...",
+                    "status": ["p","d"],
+                    "author": "user_id",
                 }
+            }
         */
     const data = await Blog.create(req.body);
     res.status(201).send({
@@ -58,22 +55,19 @@ module.exports = {
     });
   },
   update: async (req, res) => {
-      /*
+     /*
             #swagger.tags = ["Blogs"]
             #swagger.summary = "Update Blog"
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-                schema: {         
-                     "title": " Title",
-                     "content": "...content... ",
-                     "status": "p",
-                     "author": "test",
-                     "likes_n": ["test","admin",....],
-                     "likes": 28
-                     "post_views": 45,
-                     }
+                schema: {
+                    "title": "...title...",
+                    "content": "...content...",
+                    "status": "p",
+                    "author": "user_id",
                 }
+            }
         */
     const data = await Blog.updateOne({ _id: req.params.id }, req.body);
     res.status(202).send({

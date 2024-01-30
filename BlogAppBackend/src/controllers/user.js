@@ -30,16 +30,19 @@ module.exports = {
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-                schema: {         
-                    "username": "Test",
-                    "password": "aA*123456",
+                schema: {
+                    "user_name": "test",
+                    "password": "1234",
                     "email": "test@site.com",
                     "first_name": "test",
                     "last_name": "test",
-                    "image": "url"
+                    "image": "...url...",
                     "bio": "I am ...",
-                    }
+                    "is_active": true,
+                    "is_admin": false,
+
                 }
+            }
         */
     const data = await User.create(req.body);
     res.status(201).send({
@@ -68,13 +71,16 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "username": "Test",
-                    "password": "aA*123456",
+                    "user_name": "test",
+                    "password": "1234",
                     "email": "test@site.com",
                     "first_name": "test",
                     "last_name": "test",
-                    "image": "url"
-                    "bio": "I am ...",        
+                    "image": "...url...",
+                    "bio": "I am ...",
+                    "is_active": true,
+                    "is_admin": false,
+
                 }
             }
         */
@@ -85,7 +91,7 @@ module.exports = {
     });
   },
   delete: async (req, res) => {
-     /*
+    /*
             #swagger.tags = ["Users"]
             #swagger.summary = "Delete User"
         */
