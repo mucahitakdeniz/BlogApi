@@ -14,7 +14,10 @@
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "mongeese": "^0.0.1",
-    "mongoose": "^7.5.4"
+    "mongoose": "^7.5.4",
+    "redoc-express": "^2.1.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0"
   },
   "description": ""
 }

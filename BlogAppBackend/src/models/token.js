@@ -1,6 +1,13 @@
 "use strict";
 
 const mongoose = require("mongoose");
+/* ------------------------------------------------------- *
+{
+  "user_id": "65343222b67e9681f937f001",
+  "token": "...tokenKey..."
+}
+/* ------------------------------------------------------- */
+// Token Model:
 
 const TokenSchema = new mongoose.Schema(
   {

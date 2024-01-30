@@ -1,6 +1,19 @@
 "use strict";
 
 const mongoose = require("mongoose");
+/* ------------------------------------------------------- *
+{
+    "title": " Title",
+    "content": "...content... ",
+    "status": "p",
+    "author": "test",
+    "likes_n": ["test","admin",....],
+    "likes": 28
+    "post_views": 45,
+}
+ ------------------------------------------------------- */
+// Blog Model:
+
 
 const BlogSchema = new mongoose.Schema(
   {
@@ -38,13 +51,6 @@ const BlogSchema = new mongoose.Schema(
     post_views: {
       type: Number,
       default: 0,
-    },
-    commets: { type: Array, default: [] },
-    commets_count: {
-      type: Number,
-      default: function () {
-        return this.commets.length;
-      },
     },
   },
   {

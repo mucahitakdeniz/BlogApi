@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 8000;
 
 require("express-async-errors");
 
-
 //SessionCookies
 
 const session = require("cookie-session");
@@ -18,19 +17,27 @@ app.use(
   })
 );
 
+const swaggerAutogen = require('swagger-autogen')()
 app.use(express.json());
 
 require("./src/dbconnection");
 
-app.use(require('./src/middlewares/findSearchSortPage')) 
+app.use(require("./src/middlewares/findSearchSortPage"));
 
 //deneme
 app.all("/", (req, res) => {
-  res.send("Running!!!");
+  res.send({
+    error: false,
+    message: "Welcame to Blog App",
+    documents: {
+      swagger: "/documents/swagger",
+      redoc: "/documents/redoc",
+      json: "/documents/json",
+    },
+  });
 });
-app.use("/user", require("./src/routes/user"));
+app.use(require("./src/routes"));
 
-app.use("/blogs", require("./src/routes/blog"));
 
 //Synchronization
 //require("./src/sync")()

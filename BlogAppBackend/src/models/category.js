@@ -2,6 +2,13 @@
 
 const { mongoose } = require("../configs/dbConnection");
 
+/* ------------------------------------------------------- *
+{
+    "name": " Magazine",
+}
+ ------------------------------------------------------- */
+// Category Model:
+
 const CategorySchema = new mongoose.Schema(
   {
     name: {

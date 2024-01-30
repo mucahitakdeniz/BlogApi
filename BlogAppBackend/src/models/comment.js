@@ -1,6 +1,14 @@
 "use strict";
 
 const mongoose = require("mongoose");
+/* ------------------------------------------------------- *
+{
+    "content": "...comment",
+    "author": "user_id",
+    "blog_id": "blog_id",
+}
+ ------------------------------------------------------- */
+// Category Model:
 
 const CommentSchema = new mongoose.Schema(
   {
@@ -9,12 +17,12 @@ const CommentSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    author: {
+    author_id: {
       type: mongoose.Schema.ObjectId,
       required: true,
       ref: "User",
     },
-    post: {
+    blog_id: {
       type: mongoose.Schema.ObjectId,
       required: true,
       ref: "Blog",

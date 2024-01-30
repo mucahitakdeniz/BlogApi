@@ -1,15 +1,15 @@
 "use strict";
 
-const commets = require("../controllers/commets");
+const comment = require("../controllers/comment");
 
 const router = require("express").Router();
 
-router.route("/").get(commets.list).post(commets.create);
+router.route("/").get(comment.list).post(comment.create);
 router
   .route("/:id")
-  .post(commets.update)
-  .put(commets.update)
-  .delete(commets.delete);
+  .post(comment.update)
+  .put(comment.update)
+  .delete(comment.delete);
 
 //------------------------------
 

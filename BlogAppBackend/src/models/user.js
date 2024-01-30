@@ -2,9 +2,24 @@
 
 const { mongoose } = require("../configs/dbConnection");
 
+/* ------------------------------------------------------- *
+{
+    "user_name": "Test",
+    "password": "aA*123456",
+    "email": "test@site.com",
+    "first_name": "test",
+    "last_name": "test",
+    "image": "url",
+    "bio": "I am ...",
+    "is_active": true,
+    "is_admin":false
+}
+ ------------------------------------------------------- */
+// User Model:
+
 const UserSchema = new mongoose.Schema(
   {
-    username: {
+    user_name: {
       type: String,
       trim: true,
       required: true,
@@ -40,7 +55,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    isAdmin: {
+    is_active: {
+      type: Boolean,
+      default: false,
+    },
+    is_admin: {
       type: Boolean,
       default: false,
     },
@@ -60,6 +79,7 @@ UserSchema.pre(["save", "updateOne"], function (next) {
     : true;
 
   if (isEmailValidated) {
+    console.log("email ok");
     if (data?.password) {
       const isPasswordValidated =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,:;_+/-]).{8,}$/.test(
@@ -67,13 +87,13 @@ UserSchema.pre(["save", "updateOne"], function (next) {
         );
       if (isPasswordValidated) {
         this.password = data.password = passwordEncrypt(data.password);
+        next();
       } else {
         next(new Error("Password not validated"));
       }
     } else next();
   } else {
     next(new Error("Email not validated"));
-    v;
   }
 });
 
