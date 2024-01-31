@@ -16,11 +16,12 @@ module.exports = {
                 </ul>
             `
         */
-    const data = await res.getModelList(User);
+    // const data = await res.getModelList(User);
+    const data = await User.find();
     res.status(200).send({
       error: false,
       data,
-      details: res.getModelDetailList(User),
+      // details: res.getModelDetailList(User),
     });
   },
   create: async (req, res) => {
@@ -95,7 +96,7 @@ module.exports = {
             #swagger.tags = ["Users"]
             #swagger.summary = "Delete User"
         */
-    const data = await User.delete({ _id: req.params.id });
+    const data = await User.deleteOne({ _id: req.params.id });
 
     res.status(data.deletetCount ? 204 : 404).send({
       error: !data.deletetCount,
