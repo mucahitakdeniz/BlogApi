@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 /* ------------------------------------------------------- *
 {
     "content": "...comment...",
-    "author": "user_id",
+    "author_id": "user_id",
     "blog_id": "blog_id",
 }
  ------------------------------------------------------- */

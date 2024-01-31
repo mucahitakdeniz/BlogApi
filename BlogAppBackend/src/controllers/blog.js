@@ -4,7 +4,7 @@ const Blog = require("../models/blog");
 
 module.exports = {
   list: async (req, res) => {
-     /*
+    /*
             #swagger.tags = ["Blogs"]
             #swagger.summary = "List Blogs"
             #swagger.description = `
@@ -16,11 +16,16 @@ module.exports = {
                 </ul>
             `
         */
-    const data = await req.getModelList(Blog);
+    // const data = await req.getModelList(Blog);
+    const data = await Blog.find();
+    res.status(202).send({
+      error: false,
+      data,
+    });
   },
 
   create: async (req, res) => {
-      /*
+    /*
             #swagger.tags = ["Blogs"]
             #swagger.summary = "Create Blog"
             #swagger.parameters['body'] = {
@@ -55,7 +60,7 @@ module.exports = {
     });
   },
   update: async (req, res) => {
-     /*
+    /*
             #swagger.tags = ["Blogs"]
             #swagger.summary = "Update Blog"
             #swagger.parameters['body'] = {

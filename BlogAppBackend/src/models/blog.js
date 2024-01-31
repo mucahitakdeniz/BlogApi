@@ -14,7 +14,6 @@ const mongoose = require("mongoose");
  ------------------------------------------------------- */
 // Blog Model:
 
-
 const BlogSchema = new mongoose.Schema(
   {
     title: {
@@ -32,6 +31,10 @@ const BlogSchema = new mongoose.Schema(
       type: String,
       enum: ["p", "d"],
       default: "p",
+    },
+    image: {
+      type: String,
+      trim: true,
     },
     author: {
       type: mongoose.Schema.ObjectId,

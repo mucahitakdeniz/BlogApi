@@ -16,8 +16,13 @@ module.exports = {
                </ul>
            `
        */
-    const data = await req.getModelList(Comment);
+    // const data = await req.getModelList(Comment);
+    const data = await Comment.find();
+    res.status(200).send({
+      error: false,
+      data,    });
   },
+  
   create: async (req, res) => {
     /*
             #swagger.tags = ["Comments"]
@@ -27,7 +32,7 @@ module.exports = {
                 required: true,
                 schema: {
                     "content": "...comment...",
-                    "author": "user_id",
+                    "author_id": "user_id",
                     "blog_id": "blog_id",
 
                 }
