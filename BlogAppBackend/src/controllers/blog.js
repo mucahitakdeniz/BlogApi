@@ -109,15 +109,39 @@ module.exports = {
            
         */
     const currentBlog = await Blog.findOne({ _id: req.params.id });
-    const like = currentBlog.likes_n.indexOf(req.body._id);
+    const like = currentBlog.likes_n.indexOf(req.user._id);
     if (like == -1) {
-      currentBlog.likes_n.push("req.body._id");
+      currentBlog.likes_n.push(req.user._id);
     } else {
       currentBlog.likes_n.splice(like, 1);
     }
     const data = await Blog.updateOne(
       { _id: req.params.id },
-      { likes_n: currentBlog.likes_n }
+      { likes_n: currentBlog.likes_n, likes: currentBlog.likes_n.length }
+    );
+    res.status(202).send({
+      error: false,
+      result: data,
+      send: req.body,
+      newdata: await Blog.findOne({ _id: req.params.id }),
+    });
+  },
+  views: async (req, res) => {
+    /*
+            #swagger.tags = ["Blogs"]
+            #swagger.summary = "like or dislike Blog"
+           
+        */
+    const currentBlog = await Blog.findOne({ _id: req.params.id });
+    if (!currentBlog.post_views_n.includes(req.user._id)) {
+      currentBlog.post_views_n.push(req.user._id);
+    }
+    const data = await Blog.updateOne(
+      { _id: req.params.id },
+      {
+        post_views_n: currentBlog.post_views_n,
+        post_views: currentBlog.post_views_n.length,
+      }
     );
     res.status(202).send({
       error: false,

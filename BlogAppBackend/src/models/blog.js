@@ -45,8 +45,8 @@ const BlogSchema = new mongoose.Schema(
     },
     category_id: {
       type: mongoose.Schema.ObjectId,
-      required:true,
-      ref:"Category"
+      required: true,
+      ref: "Category",
     },
     likes_n: {
       type: Array,
@@ -54,9 +54,11 @@ const BlogSchema = new mongoose.Schema(
     },
     likes: {
       type: Number,
-      default: function () {
-        return this.likes_n.length;
-      },
+      default: 0,
+    },
+    post_views_n: {
+      type: Array,
+      default: [],
     },
     post_views: {
       type: Number,
