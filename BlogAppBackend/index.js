@@ -8,8 +8,9 @@ const PORT = process.env.PORT || 8000;
 
 require("express-async-errors");
 
-//Authentication
-app.use(require("./src/middlewares/authentication"));
+//dbConnection
+const { dbConnection } = require("./src/configs/dbConnection");
+dbConnection();
 
 //SessionCookies
 
@@ -20,16 +21,15 @@ app.use(
   })
 );
 
-const swaggerAutogen = require("swagger-autogen")();
 app.use(express.json());
-
-//dbConnection
-const { dbConnection } = require("./src/configs/dbConnection");
-dbConnection();
 
 app.use(require("./src/middlewares/findSearchSortPage"));
 
-//deneme
+//Authentication
+app.use(require("./src/middlewares/authentication"));
+
+//routes
+
 app.all("/", (req, res) => {
   res.send({
     error: false,
