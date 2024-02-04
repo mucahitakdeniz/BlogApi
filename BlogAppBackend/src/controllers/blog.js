@@ -117,7 +117,7 @@ module.exports = {
     }
     const data = await Blog.updateOne(
       { _id: req.params.id },
-      { likes_n: currentBlog.likes_n, likes: currentBlog.likes_n.length }
+      { likes_n: currentBlog.likes_n }
     );
     res.status(202).send({
       error: false,
