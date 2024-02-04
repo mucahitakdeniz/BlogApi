@@ -1,7 +1,7 @@
 "use strict";
 
 const { BlogCategory, BlogPost } = require("./models/blogModel");
-const User = require("./models/userModel");
+const User = require("../models/user");
 
 module.exports = async () => {
   //   const blogCategory = await BlogCategory.findOne();

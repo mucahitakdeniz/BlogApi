@@ -35,11 +35,18 @@ const BlogSchema = new mongoose.Schema(
     image: {
       type: String,
       trim: true,
+      default:
+        "https://th.bing.com/th/id/OIP.s4Owt_DFJzU5XqxwgM7yoAHaHa?w=192&h=190&c=7&r=0&o=5&pid=1.7",
     },
     author: {
       type: mongoose.Schema.ObjectId,
       required: true,
       ref: "User",
+    },
+    category_id: {
+      type: mongoose.Schema.ObjectId,
+      required:true,
+      ref:"Category"
     },
     likes_n: {
       type: Array,
