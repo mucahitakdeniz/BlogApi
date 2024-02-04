@@ -45,12 +45,14 @@ module.exports = {
                 }
             }
         */
+    if (!req.user.is_admin) {
+      req.body.is_admin = false;
+    }
     const data = await User.create(req.body);
     res.status(201).send({
       error: false,
       data,
       body: req.body,
-      //token
     });
   },
   read: async (req, res) => {
@@ -58,7 +60,11 @@ module.exports = {
             #swagger.tags = ["Users"]
             #swagger.summary = "Get Single User"
         */
-    const data = await User.findOne({ _id: req.params.id });
+    let filter = req.user._id;
+    if (req.user.is_admin || req.user._id == req.params.id) {
+      filter = req.params.id;
+    }
+    const data = await User.findOne({ _id: filter });
     res.status(200).send({
       error: false,
       data,
@@ -85,11 +91,21 @@ module.exports = {
                 }
             }
         */
-    const data = await User.updateOne({ _id: req.params.id }, req.body);
-    res.status(200).send({
-      error: false,
-      data,
-    });
+    if (!req.user.is_admin) {
+      req.body.is_admin = false;
+    }
+    if (req.user.is_admin || req.user._id == req.params.id) {
+      const data = await User.updateOne({ _id: req.params.id }, req.body);
+      res.status(200).send({
+        error: false,
+        data,
+      });
+    } else {
+      res.errorStatusCode = 403;
+      throw new Error(
+        "You must be admin or this user account must belong to you"
+      );
+    }
   },
   delete: async (req, res) => {
     /*

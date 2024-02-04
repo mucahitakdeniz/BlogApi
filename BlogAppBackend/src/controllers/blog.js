@@ -16,7 +16,6 @@ module.exports = {
                 </ul>
             `
         */
-    // const data = await req.getModelList(Blog);
     const data = await Blog.find();
     res.status(202).send({
       error: false,
@@ -74,21 +73,32 @@ module.exports = {
                 }
             }
         */
-    const data = await Blog.updateOne({ _id: req.params.id }, req.body);
-    res.status(202).send({
-      error: false,
-      result: data,
-      send: req.body,
-      newedata: await Blog.findOne({ _id: req.params.id }),
-    });
+    const currentBlog = await Blog.findOne({ _id: req.params.id });
+    if (req.user._id == currentBlog._id || req.user.is_admin) {
+      const data = await Blog.updateOne({ _id: req.params.id }, req.body);
+      res.status(202).send({
+        error: false,
+        result: data,
+        send: req.body,
+        newedata: await Blog.findOne({ _id: req.params.id }),
+      });
+    } else {
+      res.errorStatusCode = 403;
+      throw new Error("You must be the admin or this blog must belong to you");
+    }
   },
   delete: async (req, res) => {
     /*
             #swagger.tags = ["Blogs"]
             #swagger.summary = "Delete Blog"
         */
-    const data = await Blog.deleteOne({ _id: req.params.id });
-
-    res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
+    const currentBlog = await Blog.findOne({ _id: req.params.id });
+    if (req.user._id == currentBlog._id || req.user.is_admin) {
+      const data = await Blog.deleteOne({ _id: req.params.id });
+      res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
+    } else {
+      res.errorStatusCode = 403;
+      throw new Error("You must be the admin or this blog must belong to you");
+    }
   },
 };

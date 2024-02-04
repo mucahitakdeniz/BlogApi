@@ -20,9 +20,10 @@ module.exports = {
     const data = await Comment.find();
     res.status(200).send({
       error: false,
-      data,    });
+      data,
+    });
   },
-  
+
   create: async (req, res) => {
     /*
             #swagger.tags = ["Comments"]
@@ -46,7 +47,7 @@ module.exports = {
     });
   },
   update: async (req, res) => {
-  /*
+    /*
             #swagger.tags = ["Comments"]
             #swagger.summary = "Update Comment"
             #swagger.parameters['body'] = {
@@ -60,21 +61,39 @@ module.exports = {
                 }
             }
         */
-    const data = await Comment.updateOne({ _id: req.params.id }, req.body);
-    res.status(202).send({
-      error: false,
-      result: data,
-      send: req.body,
-      newedata: await Comment.findOne({ _id: req.params.id }),
-    });
+
+    const currentComment = await Comment.findOne({ _id: req.params.id });
+    if (req.user._id == currentComment._id || req.user.is_admin) {
+      const data = await Comment.updateOne({ _id: req.params.id }, req.body);
+      res.status(202).send({
+        error: false,
+        result: data,
+        send: req.body,
+        newedata: await Comment.findOne({ _id: req.params.id }),
+      });
+    } else {
+      res.errorStatusCode = 403;
+      throw new Error(
+        "You must be the admin or this comment must belong to you"
+      );
+    }
   },
   delete: async (req, res) => {
     /*
             #swagger.tags = ["Comments"]
             #swagger.summary = "Delete Comment"
         */
-    const data = await Comment.deleteOne({ _id: req.params.id });
 
-    res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
+    const currentComment = await Comment.findOne({ _id: req.params.id });
+    if (req.user._id == currentComment._id || req.user.is_admin) {
+      const data = await Comment.deleteOne({ _id: req.params.id });
+
+      res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
+    } else {
+      res.errorStatusCode = 403;
+      throw new Error(
+        "You must be the admin or this comment must belong to you"
+      );
+    }
   },
 };

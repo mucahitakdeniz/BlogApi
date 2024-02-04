@@ -21,13 +21,12 @@ module.exports = {
 
     if (req?.body.user_name && req?.body.password) {
       const user = await User.findOne({ user_name: req.body.user_name });
-      console.log("user :", user);
       if (user) {
         const password = passwordEncrypt(req.body.password);
         if (password == user.password) {
           const token = await Token.findOne({ user_id: user._id });
           if (token) {
-            res.status(401).send({
+            res.status(200).send({
               error: false,
               message: "Login successful",
               token: token.token,

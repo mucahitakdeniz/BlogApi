@@ -79,7 +79,6 @@ UserSchema.pre(["save", "updateOne"], function (next) {
     : true;
 
   if (isEmailValidated) {
-    console.log("email ok");
     if (data?.password) {
       const isPasswordValidated =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,:;_+/-]).{8,}$/.test(
