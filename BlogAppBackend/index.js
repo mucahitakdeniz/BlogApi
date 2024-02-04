@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 8000;
 
 require("express-async-errors");
 
-//
+//Authentication
+app.use(require("./src/middlewares/authentication"));
 
 //SessionCookies
 
@@ -19,10 +20,12 @@ app.use(
   })
 );
 
-const swaggerAutogen = require('swagger-autogen')()
+const swaggerAutogen = require("swagger-autogen")();
 app.use(express.json());
 
-require("./src/dbconnection");
+//dbConnection
+const { dbConnection } = require("./src/configs/dbConnection");
+dbConnection();
 
 app.use(require("./src/middlewares/findSearchSortPage"));
 
@@ -40,10 +43,9 @@ app.all("/", (req, res) => {
 });
 app.use(require("./src/routes"));
 
-
 //Synchronization
 //require("./src/sync")()
 
-app.use(require("./src/errorHandler"));
+app.use(require("./src/middlewares/errorHandler"));
 
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
