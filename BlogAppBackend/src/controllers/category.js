@@ -72,7 +72,7 @@ module.exports = {
       error: false,
       result: data,
       send: req.body,
-      newedata: await Category.findOne({ _id: req.params.id }),
+      newdata: await Category.findOne({ _id: req.params.id }),
     });
   },
   delete: async (req, res) => {

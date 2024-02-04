@@ -16,7 +16,7 @@ module.exports = {
                 </ul>
             `
         */
-    const data = await Blog.find();
+    const data = await Blog.find().populate(["category_id", "author"]);
     res.status(202).send({
       error: false,
       data,
@@ -50,9 +50,10 @@ module.exports = {
             #swagger.tags = ["Blogs"]
             #swagger.summary = "Get Single Blog"
         */
-    const data = await Blog.findOne({ _id: req.params.id }).populate(
-      "category"
-    );
+    const data = await Blog.findOne({ _id: req.params.id }).populate([
+      "category_id",
+      "author",
+    ]);
     res.status(200).send({
       error: false,
       result: data,
@@ -80,7 +81,7 @@ module.exports = {
         error: false,
         result: data,
         send: req.body,
-        newedata: await Blog.findOne({ _id: req.params.id }),
+        newdata: await Blog.findOne({ _id: req.params.id }),
       });
     } else {
       res.errorStatusCode = 403;
@@ -100,5 +101,29 @@ module.exports = {
       res.errorStatusCode = 403;
       throw new Error("You must be the admin or this blog must belong to you");
     }
+  },
+  like: async (req, res) => {
+    /*
+            #swagger.tags = ["Blogs"]
+            #swagger.summary = "like or dislike Blog"
+           
+        */
+    const currentBlog = await Blog.findOne({ _id: req.params.id });
+    const like = currentBlog.likes_n.indexOf(req.body._id);
+    if (like == -1) {
+      currentBlog.likes_n.push("req.body._id");
+    } else {
+      currentBlog.likes_n.splice(like, 1);
+    }
+    const data = await Blog.updateOne(
+      { _id: req.params.id },
+      { likes_n: currentBlog.likes_n }
+    );
+    res.status(202).send({
+      error: false,
+      result: data,
+      send: req.body,
+      newdata: await Blog.findOne({ _id: req.params.id }),
+    });
   },
 };
