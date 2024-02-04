@@ -3,14 +3,18 @@
 const blog = require("../controllers/blog");
 
 const router = require("express").Router();
+const {
+  isLogin,
+  isAdminOrHimself,
+} = require("../middlewares/permissions");
 
-router.route("/").get(blog.list).post(blog.create);
+router.route("/").get(blog.list).post(isLogin, blog.create);
 router
   .route("/:id")
   .get(blog.read)
-  .post(blog.update)
-  .put(blog.update)
-  .delete(blog.delete);
+  .post(isAdminOrHimself, blog.update)
+  .put(isAdminOrHimself, blog.update)
+  .delete(isAdminOrHimself, blog.delete);
 
 //------------------------------
 

@@ -1,6 +1,7 @@
 "use strict";
 
 const router = require("express").Router();
+const {isAdmin, isLogin} =require('../middlewares/permissions')
 
 router.use("/users", require("../routes/user"));
 router.use("/blogs", require("../routes/blog"));

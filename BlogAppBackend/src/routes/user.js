@@ -3,13 +3,18 @@
 const router = require("express").Router();
 const user = require("../controllers/user");
 
-router.route("/").get(user.list).post(user.create);
+const {
+  isAdmin,
+  isAdminOrHimself,
+} = require("../middlewares/permissions");
+
+router.route("/").get(isAdmin, user.list).post(user.create);
 
 router
   .route("/:id")
-  .get(user.read)
-  .post(user.update)
-  .put(user.update)
-  .delete(user.delete);
-  
+  .get(isAdminOrHimself, user.read)
+  .post(isAdminOrHimself, user.update)
+  .put(isAdminOrHimself, user.update)
+  .delete(isAdminOrHimself, user.delete);
+
 module.exports = router;

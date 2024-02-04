@@ -3,8 +3,8 @@
 const { mongoose } = require("../configs/dbConnection");
 
 /* ------------------------------------------------------- *
-{
-    "user_name": "Test",
+{  "_id": "65ba90b9b47ed0a4b115492b"
+    "user_name": "admin",
     "password": "aA*123456",
     "email": "test@site.com",
     "first_name": "test",
