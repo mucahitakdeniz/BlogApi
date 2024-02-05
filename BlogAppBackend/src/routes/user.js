@@ -11,7 +11,8 @@ router
   .route("/:id")
   .get(isLogin, user.read)
   .post(isLogin, user.update)
-  .put(isLogin, user.update)
+  .put(isLogin, user.update) 
   .delete(isLogin, user.delete);
+
 
 module.exports = router;

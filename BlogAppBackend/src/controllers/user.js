@@ -93,6 +93,7 @@ module.exports = {
                     "bio": "I am ...",
                     "is_active": true,
                     "is_admin": false,
+                    "recall_password":""
 
                 }
             }
@@ -105,6 +106,7 @@ module.exports = {
       res.status(200).send({
         error: false,
         data,
+        user: await User.findOne({ _id: req.params.id }),
       });
     } else {
       res.errorStatusCode = 403;

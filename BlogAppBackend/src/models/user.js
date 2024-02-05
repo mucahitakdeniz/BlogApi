@@ -13,6 +13,7 @@ const { mongoose } = require("../configs/dbConnection");
     "bio": "I am ...",
     "is_active": true,
     "is_admin":false
+    "recall_password":""
 }
  ------------------------------------------------------- */
 // User Model:
@@ -37,6 +38,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
+    },
+    recall_password: {
+      type: String,
+      trim: true,
+      default: "",
     },
 
     first_name: {
@@ -74,6 +80,7 @@ const passwordEncrypt = require("../helpers/passwordEncrypt");
 
 UserSchema.pre(["save", "updateOne"], function (next) {
   const data = this?._update || this;
+  
   const isEmailValidated = data.email
     ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)
     : true;
