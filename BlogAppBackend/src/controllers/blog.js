@@ -105,8 +105,7 @@ module.exports = {
   like: async (req, res) => {
     /*
             #swagger.tags = ["Blogs"]
-            #swagger.summary = "like or dislike Blog"
-           
+            #swagger.summary = "like or dislike Blog"   
         */
     const currentBlog = await Blog.findOne({ _id: req.params.id });
     const like = currentBlog.likes_n.indexOf(req.user._id);
@@ -129,8 +128,7 @@ module.exports = {
   views: async (req, res) => {
     /*
             #swagger.tags = ["Blogs"]
-            #swagger.summary = "like or dislike Blog"
-           
+            #swagger.summary = "Blog views"       
         */
     const currentBlog = await Blog.findOne({ _id: req.params.id });
     if (!currentBlog.post_views_n.includes(req.user._id)) {

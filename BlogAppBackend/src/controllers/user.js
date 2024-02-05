@@ -18,12 +18,10 @@ module.exports = {
                 </ul>
             `
         */
-    // const data = await res.getModelList(User);
     const data = await User.find();
     res.status(200).send({
       error: false,
       data,
-      // details: res.getModelDetailList(User),
     });
   },
   create: async (req, res) => {
@@ -41,9 +39,6 @@ module.exports = {
                     "last_name": "test",
                     "image": "...url...",
                     "bio": "I am ...",
-                    "is_active": true,
-                    "is_admin": false,
-
                 }
             }
         */
@@ -91,10 +86,6 @@ module.exports = {
                     "last_name": "test",
                     "image": "...url...",
                     "bio": "I am ...",
-                    "is_active": true,
-                    "is_admin": false,
-                    "recall_password":""
-
                 }
             }
         */

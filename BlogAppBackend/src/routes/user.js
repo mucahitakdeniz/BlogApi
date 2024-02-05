@@ -10,9 +10,8 @@ router.route("/").get(isAdmin, user.list).post(user.create);
 router
   .route("/:id")
   .get(isLogin, user.read)
-  .post(isLogin, user.update)
-  .put(isLogin, user.update) 
+  .patch(isLogin, user.update)
+  .put(isLogin, user.update)
   .delete(isLogin, user.delete);
-
 
 module.exports = router;

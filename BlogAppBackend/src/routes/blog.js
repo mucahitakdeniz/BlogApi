@@ -9,7 +9,7 @@ router.route("/").get(blog.list).post(isLogin, blog.create);
 router
   .route("/:id")
   .get(blog.read)
-  .post(isLogin, blog.update)
+  .patch(isLogin, blog.update)
   .put(isLogin, blog.update)
   .delete(isLogin, blog.delete);
 router.route("/like/:id").get(blog.like);

@@ -35,7 +35,6 @@ module.exports = {
                     "content": "...comment...",
                     "author_id": "user_id",
                     "blog_id": "blog_id",
-
                 }
             }
         */

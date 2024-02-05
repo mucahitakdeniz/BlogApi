@@ -105,14 +105,6 @@
                 "bio": {
                   "type": "string",
                   "example": "I am ..."
-                },
-                "is_active": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "is_admin": {
-                  "type": "boolean",
-                  "example": false
                 }
               }
             }
@@ -143,77 +135,6 @@
             "name": "sort",
             "in": "query",
             "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Update User",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_name": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "first_name": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "last_name": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "image": {
-                  "type": "string",
-                  "example": "...url..."
-                },
-                "bio": {
-                  "type": "string",
-                  "example": "I am ..."
-                },
-                "is_active": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "is_admin": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -274,14 +195,6 @@
                 "bio": {
                   "type": "string",
                   "example": "I am ..."
-                },
-                "is_active": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "is_admin": {
-                  "type": "boolean",
-                  "example": false
                 }
               }
             }
@@ -320,6 +233,69 @@
             "description": "Not Found"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update User",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "...url..."
+                },
+                "bio": {
+                  "type": "string",
+                  "example": "I am ..."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/blogs/": {
@@ -337,8 +313,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -420,57 +396,6 @@
           }
         }
       },
-      "post": {
-        "tags": [
-          "Blogs"
-        ],
-        "summary": "Update Blog",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string",
-                  "example": "...title..."
-                },
-                "content": {
-                  "type": "string",
-                  "example": "...content..."
-                },
-                "status": {
-                  "type": "string",
-                  "example": "p"
-                },
-                "author": {
-                  "type": "string",
-                  "example": "user_id"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
-          }
-        }
-      },
       "put": {
         "tags": [
           "Blogs"
@@ -547,6 +472,111 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Update Blog",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "...title..."
+                },
+                "content": {
+                  "type": "string",
+                  "example": "...content..."
+                },
+                "status": {
+                  "type": "string",
+                  "example": "p"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "user_id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/blogs/like/{id}": {
+      "get": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "like or dislike Blog",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/blogs/views/{id}": {
+      "get": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Blog views",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
           }
         }
       }
@@ -631,45 +661,6 @@
           }
         }
       },
-      "post": {
-        "tags": [
-          "Categories"
-        ],
-        "summary": "Update Category",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "...category name..."
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
-          }
-        }
-      },
       "put": {
         "tags": [
           "Categories"
@@ -736,6 +727,45 @@
             "description": "Not Found"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Update Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "...category name..."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
       }
     },
     "/comments/": {
@@ -753,8 +783,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -781,7 +811,7 @@
                   "type": "string",
                   "example": "...comment..."
                 },
-                "author": {
+                "author_id": {
                   "type": "string",
                   "example": "user_id"
                 },
@@ -922,6 +952,221 @@
             "description": "Not Found"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Update Comment",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "example": "...comment..."
+                },
+                "author": {
+                  "type": "string",
+                  "example": "user_id"
+                },
+                "blog_id": {
+                  "type": "string",
+                  "example": "blog_id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "description": "",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123Asd."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout",
+        "description": "",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/changepassword": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "A recall password is sent to the user's email which expires in two minutes",
+        "description": "",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/changepassword/{id}": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Receive token with recall password to be used within two minutes",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "recall_password": {
+                  "type": "string",
+                  "example": "GRSN28"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },
@@ -990,6 +1235,22 @@
             "required": {
               "type": "boolean",
               "example": true
+            }
+          }
+        },
+        "recall_password": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "default": {
+              "type": "string",
+              "example": ""
             }
           }
         },
@@ -1128,19 +1389,19 @@
             }
           }
         },
-        "author": {
+        "image": {
           "type": "object",
           "properties": {
             "type": {
               "type": "function"
             },
-            "required": {
+            "trim": {
               "type": "boolean",
               "example": true
             },
-            "ref": {
+            "default": {
               "type": "string",
-              "example": "User"
+              "example": "https://th.bing.com/th/id/OIP.s4Owt_DFJzU5XqxwgM7yoAHaHa?w=192&h=190&c=7&r=0&o=5&pid=1.7"
             }
           }
         },
@@ -1157,18 +1418,7 @@
             }
           }
         },
-        "likes": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "function"
-            },
-            "default": {
-              "type": "function"
-            }
-          }
-        },
-        "post_views": {
+        "post_views_n": {
           "type": "object",
           "properties": {
             "type": {
@@ -1177,6 +1427,38 @@
             "default": {
               "type": "number",
               "example": 0
+            }
+          }
+        },
+        "author": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "ref": {
+              "type": "string",
+              "example": "User"
+            }
+          }
+        },
+        "category_id": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "ref": {
+              "type": "string",
+              "example": "Category"
             }
           }
         }

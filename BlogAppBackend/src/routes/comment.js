@@ -10,6 +10,7 @@ router
   .route("/:id")
   .post(isLogin, comment.update)
   .put(isLogin, comment.update)
+  .patch(isLogin, comment.update)
   .delete(isLogin, comment.delete);
 
 //------------------------------

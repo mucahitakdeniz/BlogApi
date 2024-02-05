@@ -31,7 +31,6 @@ module.exports = {
                 required: true,
                 schema: {
                     "name": "...category name...",
-
                 }
             }
         */
@@ -62,8 +61,6 @@ module.exports = {
                 required: true,
                 schema: {
                     "name": "...category name...",
-
-
                 }
             }
         */

@@ -10,7 +10,7 @@ router.route("/").get(category.list).post(category.create);
 router
   .route("/:id")
   .get(category.read)
-  .post(category.update)
+  .patch(category.update)
   .put(category.update)
   .delete(category.delete);
 
