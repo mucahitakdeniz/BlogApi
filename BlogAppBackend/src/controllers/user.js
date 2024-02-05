@@ -1,6 +1,8 @@
 "use strict";
 
 const User = require("../models/user");
+const Token = require("../models/token");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
 
 module.exports = {
   list: async (req, res) => {
@@ -45,15 +47,19 @@ module.exports = {
                 }
             }
         */
-    if (!req.user.is_admin) {
-      req.body.is_admin = false;
-    }
+    req.body.is_admin = false;
+
     const data = await User.create(req.body);
-    res.status(201).send({
-      error: false,
-      data,
-      body: req.body,
-    });
+    if (data.user_name) {
+      const token = passwordEncrypt(new Date() + data._id);
+      await Token.create({ token: token, user_id: data.id });
+      res.status(201).send({
+        error: false,
+        data,
+        body: req.body,
+        token: token,
+      });
+    }
   },
   read: async (req, res) => {
     /*
