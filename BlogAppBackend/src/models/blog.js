@@ -43,11 +43,35 @@ const BlogSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    likes: {
+      type: Number,
+      default: function () {
+        return this.likes_n.length;
+      },
+      tranform: function () {
+        return this.likes_n.length;
+      },
+    },
     post_views_n: {
       type: Array,
-      default: 0,
+      default: [],
     },
+    post_views: {
+      type: Number,
+      default: function () {
+        return this.post_views_n.length;
+      },
+      transform: function () {
+        return this.post_views_n.length;
+      },
+    },
+
     author: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    author_id: {
       type: mongoose.Schema.ObjectId,
       required: true,
       ref: "User",
@@ -65,8 +89,6 @@ const BlogSchema = new mongoose.Schema(
 );
 
 BlogSchema.pre("init", function (data) {
-  data.post_views = data.post_views_n.length;
-  data.likes = data.likes_n.length;
   data.createds = data.createdAt.toLocaleDateString("tr-TR", {
     day: "2-digit",
     month: "2-digit",
