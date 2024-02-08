@@ -304,7 +304,7 @@
           "Blogs"
         ],
         "summary": "List Blogs",
-        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
+        "description": "",
         "parameters": [
           {
             "name": "sort",
@@ -355,9 +355,13 @@
                     "type": "string"
                   }
                 },
-                "author": {
+                "image": {
                   "type": "string",
-                  "example": "user_id"
+                  "example": "...url..."
+                },
+                "category_id": {
+                  "type": "string",
+                  "example": "65baabb1a9f41227c047d8a0"
                 }
               }
             }
@@ -1418,6 +1422,20 @@
             }
           }
         },
+        "likes": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "function"
+            },
+            "tranform": {
+              "type": "function"
+            }
+          }
+        },
         "post_views_n": {
           "type": "object",
           "properties": {
@@ -1425,12 +1443,43 @@
               "type": "function"
             },
             "default": {
-              "type": "number",
-              "example": 0
+              "type": "array",
+              "example": [],
+              "items": {}
+            }
+          }
+        },
+        "post_views": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "function"
+            },
+            "transform": {
+              "type": "function"
             }
           }
         },
         "author": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "author_id": {
           "type": "object",
           "properties": {
             "type": {
