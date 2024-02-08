@@ -44,7 +44,7 @@ module.exports = async function () {
   });
   await User.create({
     _id: "65343222b67e9681f937f003",
-    username: "test",
+    user_name: "test",
     password: "aA?123456",
     email: "test@site.com",
     first_name: "test",
@@ -56,8 +56,8 @@ module.exports = async function () {
 
   // Category;
 
-  /*
-  const Category = require("../models/blog");
+  /* 
+  const Category = require("../models/category");
   await Category.deleteMany(); // !!! Clear collection.
   await Category.create({
     _id: "65baab77a9f41227c047d898",
