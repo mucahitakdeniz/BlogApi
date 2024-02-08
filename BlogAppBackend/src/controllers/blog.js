@@ -26,7 +26,9 @@ module.exports = {
                     "title": "...title...",
                     "content": "...content...",
                     "status": ["p","d"],
-                    "author": "user_id",
+                    "image": "...url...",
+                    "category_id":"65baabb1a9f41227c047d8a0",
+
                 }
             }
         */

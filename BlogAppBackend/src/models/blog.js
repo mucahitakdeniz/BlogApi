@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
     "title": " Title",
     "content": "...content... ",
     "status": "p",
+    "image": "...url...",
+    "category_id": "65baabb1a9f41227c047d8a0"
     "author": "test",
     "likes_n": ["test","admin",....],
     "likes": 28
