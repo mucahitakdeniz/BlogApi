@@ -8,7 +8,7 @@ const useAxios = () => {
     dispatch(axiosStart());
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/blogs/`
+        `${import.meta.env.VITE_BASE_URL}/blogs/`
       );
       dispatch(axiosSuccess(data));
     } catch (error) {

@@ -20,7 +20,7 @@ const useCardsFn = () => {
     ;
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`,
+        `${import.meta.env.VITE_BASE_URL}/blogs/${id}/`,
         {
           headers: { Authorization: `Token ${token}` },
         }
@@ -36,7 +36,7 @@ const useCardsFn = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/blogs/`,
+        `${import.meta.env.VITE_BASE_URL}/blogs/`,
         blog,
         {
           headers: { Authorization: `Token ${token}` },
@@ -56,7 +56,7 @@ const useCardsFn = () => {
   const likesBlog = async (id) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/likes/${id}/`,
+        `${import.meta.env.VITE_BASE_URL}/blogs/like/${id}/`,
         {},
         {
           headers: {
@@ -71,7 +71,7 @@ const useCardsFn = () => {
   };
   const deleteBlog = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/blogs/${id}/`, {
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}/blogs/${id}/`, {
         headers: {
           Authorization: `Token ${token}`,
         },

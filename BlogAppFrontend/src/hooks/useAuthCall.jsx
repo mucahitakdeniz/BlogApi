@@ -18,7 +18,7 @@ const useAuthCall = () => {
   const login = async (user) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(`${URL}/users/auth/login/`, user);
+      const { data } = await axios.post(`${URL}/auth/login/`, user);
       dispatch(loginSuccess(data));
       notify("Login successful", "success");
       navigate("/");
@@ -31,7 +31,7 @@ const useAuthCall = () => {
   const logout = async () => {
     dispatch(fetchStart());
     try {
-      await axios.post(`${URL}/users/auth/logout/`);
+      await axios.post(`${URL}/auth/logout/`);
       dispatch(logoutSuccess());
       notify("Logout successful", "success");
     } catch (error) {
@@ -43,7 +43,7 @@ const useAuthCall = () => {
   const register = async (user) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(`${URL}/users/register/`, user);
+      const { data } = await axios.post(`${URL}/users/`, user);
       dispatch(registerSuccess(data));
       notify("Register successful", "success");
     } catch (error) {

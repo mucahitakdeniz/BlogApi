@@ -1,6 +1,7 @@
 "use strict";
 
 const mongoose = require("mongoose");
+const Comment = require("./comment");
 /* ------------------------------------------------------- *
 {
     "title": " Title",
@@ -66,6 +67,10 @@ const BlogSchema = new mongoose.Schema(
       transform: function () {
         return this.post_views_n.length;
       },
+    },
+    comment_count: {
+      type: Number,
+      default: 0,
     },
 
     author: {

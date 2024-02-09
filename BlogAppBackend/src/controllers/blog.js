@@ -9,10 +9,7 @@ module.exports = {
             #swagger.summary = "List Blogs"
          */
     const data = await Blog.find().populate(["category_id"]);
-    res.status(202).send({
-      error: false,
-      data,
-    });
+    res.status(202).send(data);
   },
 
   create: async (req, res) => {

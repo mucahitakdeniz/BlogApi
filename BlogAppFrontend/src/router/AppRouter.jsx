@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
-import Dishboard from "../component/Dishboard";
+import Dashboard from "../component/Dashboard";
 import About from "../component/About";
 import ReadMore from "../component/ReadMore";
 import PrivateRouter from "./PrivateRouter";
@@ -16,7 +16,7 @@ const AppRouter = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Home />}>
-        <Route index element={<Dishboard />} />
+        <Route index element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="" element={<PrivateRouter />}>
           <Route path="profile" element={<Profile />} />

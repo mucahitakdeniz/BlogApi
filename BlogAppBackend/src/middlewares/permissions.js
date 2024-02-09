@@ -2,6 +2,7 @@
 
 module.exports = {
   isLogin: (req, res, next) => {
+
     if (req.user && req.user.is_active) {
       next();
     } else {
@@ -16,5 +17,5 @@ module.exports = {
       res.errorStatusCode = 403;
       throw new Error("No Permission : You must Admin");
     }
-  }
+  },
 };

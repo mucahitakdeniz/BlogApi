@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { notify } from "../helper/sweetaAlert";
 
-const Cards = ({ cardsData }) => {
+const Cards = ({ blogsData }) => {
   const { readMore, likesBlog } = useCardsFn();
   const { currentUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -25,29 +25,30 @@ const Cards = ({ cardsData }) => {
       navigate("login");
     }
   };
-
   return (
-    <Grid
-      container
-      spacing={5}
-      sx={{ marginY: "2rem", justifyContent: "center" }}
-    >
-      {cardsData?.map((item) => (
-        <Grid item key={item.id} xs={12} sm={6} md={4}>
+    <Grid container spacing={4} marginTop={5} marginBottom={7}>
+      {blogsData?.map((item) => (
+        <Grid item key={item._id} xs={12} sm={6} md={4}>
           <Card
             sx={{
-              padding: "2rem",
-              width: "80%",
+              padding: "2.3rem",
+              width: "17",
               height: "30rem",
               boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
-              gap: "5px",
+              justifyContent: "center",
+              gap: "7px",
             }}
           >
             <CardMedia
-              sx={{ height: "100px", width: "100px", margin: "auto" }}
+              sx={{
+                height: "19rem",
+                width: "19rem",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                margin: "auto",
+              }}
               image={item.image}
               title={item.title}
             />
@@ -59,22 +60,23 @@ const Cards = ({ cardsData }) => {
               <Typography
                 variant="body2"
                 color="text.secondary"
-                sx={{ maxHeight: "2.5rem", overflow: "hidden" }}
+                sx={{
+                  maxHeight: "2.5rem",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  mb: 1,
+                }}
               >
                 {item.content}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {new Intl.DateTimeFormat("tr-TR", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  second: "2-digit",
-                  hour12: false,
-                }).format(new Date(item.publish_date))}
+                {item.createds}
               </Typography>
-              <Typography variant="body3" color="text.secondary">
+              <Typography
+                variant="h6"
+                color="text.secondary.dark"
+                sx={{ mt: 1 }}
+              >
                 {item.author}
               </Typography>
             </CardContent>
@@ -83,7 +85,7 @@ const Cards = ({ cardsData }) => {
                 <Box sx={{ display: "flex" }}>
                   <FavoriteIcon
                     onClick={() => {
-                      likesBlog(item.id)
+                      likesBlog(item._id)
                         .then(() => {
                           navigate("/");
                         })
@@ -99,7 +101,7 @@ const Cards = ({ cardsData }) => {
                 <Box sx={{ display: "flex" }}>
                   <ChatBubbleOutlineIcon />
                   <Typography variant="body3" color="text.secondary">
-                    {item.comment_count}
+                    {/* {item.comment_count} */} 0
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex" }}>
@@ -114,7 +116,7 @@ const Cards = ({ cardsData }) => {
                   backgroundColor: "lightgreen",
                   marginLeft: "2rem",
                 }}
-                onClick={() => handleReadMore(item.id)}
+                onClick={() => handleReadMore(item._id)}
               >
                 Read More
               </Button>
