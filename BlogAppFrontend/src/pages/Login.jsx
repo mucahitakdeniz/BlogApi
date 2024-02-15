@@ -16,21 +16,18 @@ import { Link } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
 
 const Login = () => {
-
   const { login } = useAuthCall();
   const [show, setShow] = useState(false);
   const loginSchema = object({
-    email: string()
-      .email("Lütfen geçerli bir e-posta adresi giriniz!")
-      .required("Bu alan boş kırakılamaz"),
+    user_name: string().required("Bu alan boş kırakılamaz"),
     password: string()
       .required("Bu alan boş kırakılamaz")
-      .min(8, "Şifreniz 8 karakretden küçük olamaz")
-      .max(20, "Şifreniz 20 karakretden büyük olamaz")
-      .matches(/\d+/, "En az bir rakam içermelidir.")
+      .min(8, "Şifreniz 8 karakterden büyük olmalıdır")
+      .max(20, "Şifreniz 20 karakterden küçük olmalıdır")
+      .matches(/\d/, "En az bir rakam içermelidir.")
       .matches(/[a-z]/, "En az bir küçük harf içermelidir.")
       .matches(/[A-Z]/, "En az bir büyük harf içermelidir.")
-      .matches(/[!,?{}><%&$#*£+-.]+/, "En az bir özel karekter içermelidir."),
+      .matches(/[!,?{}><%&$#*£+-.]/, "En az bir özel karakter içermelidir."),
   });
 
   const togglePasswordVisibility = () => {
@@ -62,7 +59,7 @@ const Login = () => {
           </Avatar>
 
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ user_name: "", password: "" }}
             validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               login(values);
@@ -91,15 +88,15 @@ const Login = () => {
                     Üye Girişi
                   </Typography>
                   <TextField
-                    type="email"
-                    name="email"
-                    label="Email"
+                    type="text"
+                    name="user_name"
+                    label="Kullanıcı Adı"
                     variant="outlined"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.email}
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={errors.email}
+                    value={values.user_name}
+                    error={touched.user_name && Boolean(errors.user_name)}
+                    helperText={errors.user_name}
                   />
 
                   <TextField
@@ -120,7 +117,7 @@ const Login = () => {
                             {show ? (
                               <Visibility sx={{ color: "red" }} />
                             ) : (
-                              <VisibilityOff x={{ color: "green" }} />
+                              <VisibilityOff sx={{ color: "green" }} />
                             )}
                           </IconButton>
                         </InputAdornment>
