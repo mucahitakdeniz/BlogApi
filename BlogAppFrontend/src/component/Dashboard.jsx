@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 const Dashboard = () => {
   const { blogsData } = useSelector((state) => state.blogs);
   const { axiosFn } = useAxios();
-  console.log(blogsData);
   useEffect(() => {
     axiosFn();
   }, []);

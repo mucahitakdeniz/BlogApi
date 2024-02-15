@@ -79,7 +79,7 @@ module.exports = {
       });
     } else {
       res.errorStatusCode = 403;
-      throw new Error("You must be the admin or this blog must belong to you");
+      throw new Error("Uyarı ! Yalnızca admin veya blog sahibi bu işlemi yapabilir");
     }
   },
   delete: async (req, res) => {
@@ -93,7 +93,7 @@ module.exports = {
       res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
     } else {
       res.errorStatusCode = 403;
-      throw new Error("You must be the admin or this blog must belong to you");
+      throw new Error("Uyarı ! Yalnızca admin veya blog sahibi bu işlemi yapabilir");
     }
   },
   like: async (req, res) => {

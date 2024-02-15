@@ -77,7 +77,7 @@ module.exports = {
     } else {
       res.errorStatusCode = 403;
       throw new Error(
-        "You must be the admin or this comment must belong to you"
+        "Uyarı ! Yalnızca admin veya yorum sahibi bu işlemi yapabilir"
       );
     }
   },
@@ -103,7 +103,7 @@ module.exports = {
     } else {
       res.errorStatusCode = 403;
       throw new Error(
-        "You must be the admin or this comment must belong to you"
+        "Uyarı ! Yalnızca admin veya yorum sahibi bu işlemi yapabilir"
       );
     }
   },

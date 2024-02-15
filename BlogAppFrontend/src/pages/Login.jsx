@@ -34,107 +34,105 @@ const Login = () => {
     setShow(!show);
   };
   return (
-    <Container maxWidth="lg" sx={{ display: "flex", justifyContent: "center" }}>
-      <Grid
-        xs={12}
-        container
-        justifyContent="center"
-        direction="row-reverse"
-        sx={{
-          maxWidth: "80vh",
-          p: 2,
-        }}
-      >
-        <Grid item xs={12}>
-          <Avatar
-            sx={{
-              color: "green",
-              backgroundColor: "lightgrey",
-              m: "auto",
-              width: "5rem",
-              height: "5rem",
-            }}
-          >
-            <LockPersonRoundedIcon sx={{ width: "3rem", height: "3rem" }} />
-          </Avatar>
+    <Grid
+      xs={12}
+      container
+      display="flex"
+      justifyContent="center"
+      direction="row-reverse"
+      maxWidth="lg"
+      sx={{
+        p: 2,
+      }}
+    >
+      <Grid item xs={12}>
+        <Avatar
+          sx={{
+            color: "green",
+            backgroundColor: "lightgrey",
+            m: "auto",
+            width: "5rem",
+            height: "5rem",
+          }}
+        >
+          <LockPersonRoundedIcon sx={{ width: "3rem", height: "3rem" }} />
+        </Avatar>
 
-          <Formik
-            initialValues={{ user_name: "", password: "" }}
-            validationSchema={loginSchema}
-            onSubmit={(values, actions) => {
-              login(values);
-              actions.resetForm();
-              actions.setSubmitting(false);
-            }}
-          >
-            {({ handleChange, handleBlur, values, touched, errors }) => (
-              <Form>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    margin: "auto",
-                    gap: 2,
-                    width: "25rem",
-                    height: "1.5rem",
-                  }}
+        <Formik
+          initialValues={{ user_name: "", password: "" }}
+          validationSchema={loginSchema}
+          onSubmit={(values, actions) => {
+            login(values);
+            actions.resetForm();
+            actions.setSubmitting(false);
+          }}
+        >
+          {({ handleChange, handleBlur, values, touched, errors }) => (
+            <Form>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  margin: "auto",
+                  gap: 4,
+                  width: "30rem",
+                }}
+              >
+                <Typography
+                  variant="h4"
+                  color="darkgreen"
+                  marginX={15}
+                  marginY={5}
                 >
-                  <Typography
-                    variant="h4"
-                    color="darkgreen"
-                    marginX={15}
-                    marginY={5}
-                  >
-                    Üye Girişi
-                  </Typography>
-                  <TextField
-                    type="text"
-                    name="user_name"
-                    label="Kullanıcı Adı"
-                    variant="outlined"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.user_name}
-                    error={touched.user_name && Boolean(errors.user_name)}
-                    helperText={errors.user_name}
-                  />
+                  Üye Girişi
+                </Typography>
+                <TextField
+                  type="text"
+                  name="user_name"
+                  label="Kullanıcı Adı"
+                  variant="outlined"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.user_name}
+                  error={touched.user_name && Boolean(errors.user_name)}
+                  helperText={errors.user_name}
+                />
 
-                  <TextField
-                    xs={12}
-                    type={show ? "text" : "password"}
-                    name="password"
-                    label="Password"
-                    variant="outlined"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                    error={touched.password && Boolean(errors.password)}
-                    helperText={errors.password}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={togglePasswordVisibility}>
-                            {show ? (
-                              <Visibility sx={{ color: "red" }} />
-                            ) : (
-                              <VisibilityOff sx={{ color: "green" }} />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <Button variant="contained" type="submit">
-                    Giriş
-                  </Button>
-                  <Link to="/register">Hesabınız yok mu? Kaydolun</Link>
-                </Box>
-              </Form>
-            )}
-          </Formik>
-        </Grid>
+                <TextField
+                  xs={12}
+                  type={show ? "text" : "password"}
+                  name="password"
+                  label="Password"
+                  variant="outlined"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  error={touched.password && Boolean(errors.password)}
+                  helperText={errors.password}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={togglePasswordVisibility}>
+                          {show ? (
+                            <Visibility sx={{ color: "red" }} />
+                          ) : (
+                            <VisibilityOff sx={{ color: "green" }} />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <Button variant="contained" type="submit">
+                  Giriş
+                </Button>
+                <Link to="/register">Hesabınız yok mu? Kaydolun</Link>
+              </Box>
+            </Form>
+          )}
+        </Formik>
       </Grid>
-    </Container>
+    </Grid>
   );
 };
 

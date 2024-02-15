@@ -20,12 +20,17 @@ const useAuthCall = () => {
     try {
       const { data } = await axios.post(`${URL}/auth/login/`, user);
       dispatch(loginSuccess(data));
-      notify("Login successful", "success");
+      notify("Giriş İşlemi Başarılı", "success");
       navigate("/");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      notify("Login failed", "error");
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Login failed",
+        "error"
+      );
     }
   };
   const logout = async () => {

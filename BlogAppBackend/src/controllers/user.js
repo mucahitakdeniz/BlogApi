@@ -102,7 +102,7 @@ module.exports = {
     } else {
       res.errorStatusCode = 403;
       throw new Error(
-        "You must be admin or this user account must belong to you"
+        "Uyarı ! Yalnızca admin ve hesap sahibi bu işlemi yapabilir"
       );
     }
   },
