@@ -51,7 +51,7 @@ const BlogSchema = new mongoose.Schema(
       default: function () {
         return this.likes_n.length;
       },
-      tranform: function () {
+      transform: function () {
         return this.likes_n.length;
       },
     },

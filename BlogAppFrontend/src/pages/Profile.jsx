@@ -6,8 +6,6 @@ import { deepOrange } from "@mui/material/colors";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser);
-  console.log(currentUser.image);
 
   return (
     <Box

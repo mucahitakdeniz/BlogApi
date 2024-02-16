@@ -15,7 +15,7 @@ import { notify } from "../helper/sweetaAlert";
 
 const Cards = ({ blogsData }) => {
   const { readMore, likesBlog } = useCardsFn();
-  const { currentUser } = useSelector((state) => state.auth);
+  const { currentUser, currentUserId } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleReadMore = (id) => {
     if (currentUser) {
@@ -24,6 +24,9 @@ const Cards = ({ blogsData }) => {
       notify("Bu işlemi yapmak için giriş yapmalısın", "error");
       navigate("login");
     }
+  };
+  const handleLike = (id) => {
+    likesBlog(id);
   };
   return (
     <Grid container spacing={4} marginTop={5} marginBottom={7}>
@@ -85,9 +88,14 @@ const Cards = ({ blogsData }) => {
               <Box sx={{ display: "flex", gap: "1rem" }}>
                 <Box sx={{ display: "flex" }}>
                   <FavoriteIcon
+                    sx={{
+                      "color": item.likes_n.includes(currentUserId) ? "red" : "",
+                      "&:hover": {
+                        cursor: "pointer",
+                      },
+                    }}
                     onClick={() => {
-                      likesBlog(item._id);
-                      navigate("/");
+                      handleLike(item._id);
                     }}
                   />
                   <Typography variant="body3" color="text.secondary">

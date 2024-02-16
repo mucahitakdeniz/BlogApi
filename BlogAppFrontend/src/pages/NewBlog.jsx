@@ -24,7 +24,6 @@ const NewBlog = () => {
       ...newBlogInfo,
       [e.target.name]: e.target.value,
     });
-    console.log(newBlogInfo);
   };
   const [newBlogInfo, setNewBlogInfo] = useState({
     title: "",
@@ -36,7 +35,6 @@ const NewBlog = () => {
   const [showCategory, setshowCategory] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newBlogInfo);
     createBlog(newBlogInfo);
     setNewBlogInfo({
       title: "",

@@ -45,7 +45,7 @@ const cardsSlice = createSlice({
       state.comment_count = payload?.comment_count;
       state.likes_n = payload?.likes_n;
     },
-    createBlogSuccess: (state,{ payload }) => {
+    createBlogSuccess: (state, { payload }) => {
       state.loading = false;
       state.id = payload?.id;
       state.title = payload?.title;
@@ -63,7 +63,7 @@ const cardsSlice = createSlice({
       state.comment_count = payload?.comment_count;
       state.likes_n = payload?.likes_n;
     },
-    deleteBlogSuccess:(state) => {
+    deleteBlogSuccess: (state) => {
       state.loading = false;
       state.id = null;
       state.title = null;
@@ -73,15 +73,15 @@ const cardsSlice = createSlice({
       state.publish_date = null;
       state.author = null;
       state.status = null;
-      state.slug = null      
+      state.slug = null;
       state.comments = null;
       state.category_name = null;
-      state.likes = null
+      state.likes = null;
       state.post_views = null;
       state.comment_count = null;
       state.likes_n = null;
     },
-   
+
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -89,5 +89,12 @@ const cardsSlice = createSlice({
   },
 });
 
-export const { fetchStart, readCards, fetchFail,createBlogSuccess,deleteBlogSuccess } = cardsSlice.actions;
+export const {
+  fetchStart,
+  readCards,
+  fetchFail,
+  createBlogSuccess,
+  deleteBlogSuccess,
+  likeBlogSuccsess,
+} = cardsSlice.actions;
 export default cardsSlice.reducer;

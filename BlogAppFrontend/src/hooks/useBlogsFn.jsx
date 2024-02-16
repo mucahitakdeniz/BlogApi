@@ -52,7 +52,6 @@ const useCardsFn = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.post(`$/blogs/`, blog);
-      console.log("Blog oluşturma işlemi başarılı");
       dispatch(createBlogSuccess(data));
       notify("Blog oluşturma işlemi başarılı", "success");
       navigate("/");
@@ -68,22 +67,18 @@ const useCardsFn = () => {
   };
   const likesBlog = async (id) => {
     dispatch(fetchStart());
-
     try {
-      const response = await axiosWithToken.get(
-        `/like/${id}/`) 
-      console.log("Blog beğenme işlemi başarılı:", response.data);
+      await axiosWithToken.get(`blogs/like/${id}/`);
+      getBlogs();
     } catch (error) {
       dispatch(fetchFail());
-
-      console.error("Blog beğenme işlemi sırasında hata oluştu:", error);
     }
   };
   const deleteBlog = async (id) => {
     dispatch(fetchStart());
 
     try {
-      await axiosWithToken.delete(`/blogs/${id}`) 
+      await axiosWithToken.delete(`/blogs/${id}`);
       dispatch(deleteBlogSuccess());
       notify("Blog başarıyla silindi", "success");
     } catch (error) {
@@ -98,6 +93,6 @@ const useCardsFn = () => {
       console.log(error);
     }
   };
-  return { readMore, createBlog, likesBlog, deleteBlog,getBlogs };
+  return { readMore, createBlog, likesBlog, deleteBlog, getBlogs };
 };
 export default useCardsFn;
