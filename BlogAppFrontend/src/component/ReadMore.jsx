@@ -31,7 +31,7 @@ const ReadMore = () => {
           borderBottom: "1px solid  white",
         }}
       >
-        <CardMedia
+        {/* <CardMedia
           sx={{
             height: "30rem",
             maxwidth: "30rem",
@@ -40,7 +40,7 @@ const ReadMore = () => {
           }}
           image={card.image}
           title={card.title}
-        />
+        /> */}
         <CardContent
           sx={{ marginY: "1rem", display: "flex", alignItems: "center" }}
         >

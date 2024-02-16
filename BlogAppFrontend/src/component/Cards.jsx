@@ -26,7 +26,12 @@ const Cards = ({ blogsData }) => {
     }
   };
   const handleLike = (id) => {
-    likesBlog(id);
+    if (currentUser) {
+      likesBlog(id);
+    } else {
+      notify("Bu işlemi yapmak için giriş yapmalısın", "error");
+      navigate("login");
+    }
   };
   return (
     <Grid container spacing={4} marginTop={5} marginBottom={7}>

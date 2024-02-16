@@ -8,7 +8,7 @@ module.exports = {
             #swagger.tags = ["Blogs"]
             #swagger.summary = "List Blogs"
          */
-    const data = await Blog.find().populate(["category_id"]);
+    const data = await Blog.find({ status: "p" }).populate(["category_id"]);
     res.status(202).send(data);
   },
 
@@ -132,5 +132,4 @@ module.exports = {
       newdata: await Blog.findOne({ _id: req.params.id }),
     });
   },
-
 };

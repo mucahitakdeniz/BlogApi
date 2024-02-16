@@ -35,8 +35,9 @@ const useCardsFn = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.get(`/blogs/${id}/`);
-      dispatch(readCards(data));
-      navigate("/readMore");
+      dispatch(readCards(data.result));
+      console.log(data);
+      navigate("/readmore");
     } catch (error) {
       console.log(error);
       notify(
