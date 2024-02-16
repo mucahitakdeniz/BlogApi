@@ -4,11 +4,11 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import {FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import useCardsFn from "../hooks/useCardsFn";
+import useBlogsFn from "../hooks/useBlogsFn";
 
 const NewBlog = () => {
   const navigate = useNavigate();
-  const { createBlog } = useCardsFn();
+  const { createBlog } = useBlogsFn();
 
   const category = [
     "Trivia",

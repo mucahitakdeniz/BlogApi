@@ -12,7 +12,6 @@ import {
 } from "../features/blogSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { notify } from "../helper/sweetaAlert";
 import useAxios from "./useAxios";
 
@@ -20,7 +19,6 @@ const useCardsFn = () => {
   const { axiosWithToken } = useAxios();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
 
   const getBlogs = async () => {
     dispatch(getBlogsStart());

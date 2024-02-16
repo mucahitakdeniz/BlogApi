@@ -21,7 +21,7 @@ const Cards = ({ blogsData }) => {
     if (currentUser) {
       readMore(id);
     } else {
-      notify("You must be logged in to use this feature", "error");
+      notify("Bu işlemi yapmak için giriş yapmalısın", "error");
       navigate("login");
     }
   };
@@ -31,7 +31,7 @@ const Cards = ({ blogsData }) => {
         <Grid item key={item._id} xs={12} sm={6} md={4}>
           <Card
             sx={{
-              padding: "2.3rem",
+              padding: "1rem",
               width: "17",
               height: "30rem",
               boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
@@ -45,6 +45,7 @@ const Cards = ({ blogsData }) => {
               sx={{
                 height: "19rem",
                 width: "19rem",
+                padding: "1rem",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 margin: "auto",
@@ -81,17 +82,12 @@ const Cards = ({ blogsData }) => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Box sx={{ display: "flex", gap: "5px" }}>
+              <Box sx={{ display: "flex", gap: "1rem" }}>
                 <Box sx={{ display: "flex" }}>
                   <FavoriteIcon
                     onClick={() => {
-                      likesBlog(item._id)
-                        .then(() => {
-                          navigate("/");
-                        })
-                        .catch((error) => {
-                          console.error("Beğeni işlemi hatası:", error);
-                        });
+                      likesBlog(item._id);
+                      navigate("/");
                     }}
                   />
                   <Typography variant="body3" color="text.secondary">
@@ -101,7 +97,7 @@ const Cards = ({ blogsData }) => {
                 <Box sx={{ display: "flex" }}>
                   <ChatBubbleOutlineIcon />
                   <Typography variant="body3" color="text.secondary">
-                    {/* {item.comment_count} */} 0
+                    {item.comment_count}
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex" }}>

@@ -49,7 +49,7 @@ const ReadMore = () => {
             <Typography variant="body1" color="text.secondary">
               {card.author}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            {/* <Typography variant="body2" color="text.secondary">
               {new Intl.DateTimeFormat("tr-TR", {
                 year: "numeric",
                 month: "2-digit",
@@ -59,7 +59,7 @@ const ReadMore = () => {
                 second: "2-digit",
                 hour12: false,
               }).format(new Date(card.publish_date))}
-            </Typography>
+            </Typography> */}
           </CardContent>
         </CardContent>
         <CardContent>
