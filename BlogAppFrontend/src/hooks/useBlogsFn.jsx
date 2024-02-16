@@ -66,11 +66,13 @@ const useCardsFn = () => {
       );
     }
   };
-  const likesBlog = async (id) => {
+  const likesBlog = async (id, read = true) => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.get(`blogs/like/${id}/`);
-      getBlogs();
+      if (!read) {
+        getBlogs();
+      }
     } catch (error) {
       dispatch(fetchFail());
     }

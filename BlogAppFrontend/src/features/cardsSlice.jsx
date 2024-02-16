@@ -20,6 +20,7 @@ const cardsSlice = createSlice({
     post_views: null,
     comment_count: null,
     likes_n: null,
+    createds: null,
   },
   reducers: {
     fetchStart: (state) => {
@@ -29,7 +30,7 @@ const cardsSlice = createSlice({
 
     readCards: (state, { payload }) => {
       state.loading = false;
-      state.id = payload?.id;
+      state.id = payload?._id;
       state.title = payload?.title;
       state.content = payload?.content;
       state.image = payload?.image;
@@ -44,10 +45,11 @@ const cardsSlice = createSlice({
       state.post_views = payload?.post_views;
       state.comment_count = payload?.comment_count;
       state.likes_n = payload?.likes_n;
+      state.createds = payload?.createds;
     },
     createBlogSuccess: (state, { payload }) => {
       state.loading = false;
-      state.id = payload?.id;
+      state.id = payload?._id;
       state.title = payload?.title;
       state.content = payload?.content;
       state.image = payload?.image;
