@@ -7,18 +7,17 @@ import {
 } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import { notify } from "../helper/sweetaAlert";
+import useAxios from "./useAxios";
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const URL = import.meta.env.VITE_BASE_URL;
-
+  const { axiosWithToken } = useAxios();
   const login = async (user) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(`${URL}/auth/login/`, user);
+      const { data } = await axiosWithToken.post(`/auth/login/`, user);
       dispatch(loginSuccess(data));
       notify("Giriş İşlemi Başarılı", "success");
       navigate("/");
@@ -28,7 +27,7 @@ const useAuthCall = () => {
       notify(
         error?.response?.data.message
           ? error.response.data.message
-          : "Login failed",
+          : "Bir hata oldu. Lütfen tekrar deneyiniz",
         "error"
       );
     }
@@ -36,25 +35,30 @@ const useAuthCall = () => {
   const logout = async () => {
     dispatch(fetchStart());
     try {
-      await axios.post(`${URL}/auth/logout/`);
+      await axiosWithToken.get(`auth/logout/`);
       dispatch(logoutSuccess());
-      notify("Logout successful", "success");
+      notify("Çıkiş işlemi başarılı", "success");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      notify("Logout failed", "error");
+      notify("Bir hata oldu. Lütfen tekrar deneyiniz", "error");
     }
   };
   const register = async (user) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(`${URL}/users/`, user);
+      const { data } = await axiosWithToken.post(`/users/`, user);
       dispatch(registerSuccess(data));
-      notify("Register successful", "success");
+      notify("Kayıt işlemi başarılı ", "success");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      notify("Register failed", "error");
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Kayıt işleminde bir hata oldu. Lütfen tekrar deneyiniz",
+        "error"
+      );
     }
   };
   return { login, logout, register };

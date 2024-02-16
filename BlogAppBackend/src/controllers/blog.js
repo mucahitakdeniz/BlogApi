@@ -52,6 +52,15 @@ module.exports = {
       error: false,
       result: data,
     });
+    if (!data.post_views_n.includes(req.user._id)) {
+      data.post_views_n.push(req.user._id);
+      await Blog.updateOne(
+        { _id: req.params.id },
+        {
+          post_views_n: data.post_views_n,
+        }
+      );
+    }
   },
   update: async (req, res) => {
     /*
@@ -79,7 +88,9 @@ module.exports = {
       });
     } else {
       res.errorStatusCode = 403;
-      throw new Error("Uyarı ! Yalnızca admin veya blog sahibi bu işlemi yapabilir");
+      throw new Error(
+        "Uyarı ! Yalnızca admin veya blog sahibi bu işlemi yapabilir"
+      );
     }
   },
   delete: async (req, res) => {
@@ -93,7 +104,9 @@ module.exports = {
       res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
     } else {
       res.errorStatusCode = 403;
-      throw new Error("Uyarı ! Yalnızca admin veya blog sahibi bu işlemi yapabilir");
+      throw new Error(
+        "Uyarı ! Yalnızca admin veya blog sahibi bu işlemi yapabilir"
+      );
     }
   },
   like: async (req, res) => {
@@ -119,26 +132,5 @@ module.exports = {
       newdata: await Blog.findOne({ _id: req.params.id }),
     });
   },
-  views: async (req, res) => {
-    /*
-            #swagger.tags = ["Blogs"]
-            #swagger.summary = "Blog views"       
-        */
-    const currentBlog = await Blog.findOne({ _id: req.params.id });
-    if (!currentBlog.post_views_n.includes(req.user._id)) {
-      currentBlog.post_views_n.push(req.user._id);
-    }
-    const data = await Blog.updateOne(
-      { _id: req.params.id },
-      {
-        post_views_n: currentBlog.post_views_n,
-      }
-    );
-    res.status(202).send({
-      error: false,
-      result: data,
-      send: req.body,
-      newdata: await Blog.findOne({ _id: req.params.id }),
-    });
-  },
+
 };

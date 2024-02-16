@@ -5,22 +5,23 @@ const blogSlace = createSlice({
   initialState: {
     loading: false,
     error: false,
-    blogsData: null,
+    blogsData: [],
   },
   reducers: {
-    axiosStart: (state) => {
+    getBlogsStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-    axiosFail: (state) => {
+    getBlogsFail: (state) => {
       state.loading = false;
       state.error = true;
     },
-    axiosSuccess: (state, { payload }) => {
+    getBlogsSuccess: (state, { payload }) => {
       state.loading = false;
       state.blogsData = payload;
     },
   },
 });
-export const { axiosFail, axiosStart, axiosSuccess } = blogSlace.actions;
+export const { getBlogsFail, getBlogsStart, getBlogsSuccess } =
+  blogSlace.actions;
 export default blogSlace.reducer;

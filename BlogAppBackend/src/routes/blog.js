@@ -13,7 +13,6 @@ router
   .put(isLogin, blog.update)
   .delete(isLogin, blog.delete);
 router.route("/like/:id").get(blog.like);
-router.route("/views/:id").get(blog.views);
 
 //------------------------------
 
