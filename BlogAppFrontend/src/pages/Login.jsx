@@ -35,11 +35,12 @@ const Login = () => {
   };
   return (
     <Grid
-      xs={12}
       container
       display="flex"
       justifyContent="center"
+      alignItems="center"
       direction="row-reverse"
+      margin="auto"
       maxWidth="lg"
       sx={{
         p: 2,
@@ -123,6 +124,7 @@ const Login = () => {
                     ),
                   }}
                 />
+                <Link to="/forgotpassword">Şifrenini unuttunuz mu</Link>
                 <Button variant="contained" type="submit">
                   Giriş
                 </Button>

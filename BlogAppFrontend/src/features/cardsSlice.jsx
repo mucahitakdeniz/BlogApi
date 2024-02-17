@@ -14,9 +14,8 @@ const cardsSlice = createSlice({
     author: null,
     status: null,
     slug: null,
-    comments: null,
     category_name: null,
-    likes: [],
+    likes: null,
     post_views: null,
     comment_count: null,
     likes_n: [],
@@ -39,7 +38,6 @@ const cardsSlice = createSlice({
       state.author = payload?.author;
       state.status = payload?.status;
       state.slug = payload?.slug;
-      state.comments = payload?.comments;
       state.category_name = payload?.category_name;
       state.likes = payload?.likes;
       state.post_views = payload?.post_views;
@@ -58,7 +56,6 @@ const cardsSlice = createSlice({
       state.author = payload?.author;
       state.status = payload?.status;
       state.slug = payload?.slug;
-      state.comments = payload?.comments;
       state.category_name = payload?.category_name;
       state.likes = payload?.likes;
       state.post_views = payload?.post_views;
@@ -76,7 +73,6 @@ const cardsSlice = createSlice({
       state.author = null;
       state.status = null;
       state.slug = null;
-      state.comments = null;
       state.category_name = null;
       state.likes = null;
       state.post_views = null;

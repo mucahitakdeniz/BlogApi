@@ -14,19 +14,26 @@ import { useNavigate } from "react-router-dom";
 import { notify } from "../helper/sweetaAlert";
 
 const Cards = ({ blogsData }) => {
-  const { readMore, likesBlog } = useCardsFn();
+  const { likesBlog } = useCardsFn();
   const { currentUser, currentUserId } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleReadMore = (id) => {
     if (currentUser) {
-      readMore(id);
-      navigate("/readmore");
+      navigate(`/readmore/${id}`);
     } else {
       notify("Bu işlemi yapmak için giriş yapmalısın", "error");
       navigate("login");
     }
   };
   const handleLike = (id) => {
+    if (currentUser) {
+      likesBlog(id);
+    } else {
+      notify("Bu işlemi yapmak için giriş yapmalısın", "error");
+      navigate("login");
+    }
+  };
+  const handleComment = (id) => {
     if (currentUser) {
       likesBlog(id);
     } else {
@@ -79,15 +86,16 @@ const Cards = ({ blogsData }) => {
               >
                 {item.content}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {item.createds}
-              </Typography>
+
               <Typography
                 variant="h6"
                 color="text.secondary.dark"
                 sx={{ mt: 1 }}
               >
                 {item.author}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {item.createds}
               </Typography>
             </CardContent>
             <CardActions>
@@ -109,7 +117,14 @@ const Cards = ({ blogsData }) => {
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex" }}>
-                  <ChatBubbleOutlineIcon />
+                  <ChatBubbleOutlineIcon
+                    sx={{
+                      "&:hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                    onClick={() => handleComment(item._id)}
+                  />
                   <Typography variant="body3" color="text.secondary">
                     {item.comment_count}
                   </Typography>
@@ -124,7 +139,8 @@ const Cards = ({ blogsData }) => {
               <Button
                 sx={{
                   backgroundColor: "lightgreen",
-                  marginLeft: "2rem",
+                  marginLeft: "5rem",
+                  "&:hover": { backgroundColor: "lightsalmon", color: "black" },
                 }}
                 onClick={() => handleReadMore(item._id)}
               >

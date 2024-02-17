@@ -10,36 +10,40 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import useCardsFn from "../hooks/useBlogsFn";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ReadMore = () => {
   const { likesBlog, readMore, deleteBlog } = useCardsFn();
-
+  const { id } = useParams();
+  const navigate = useNavigate();
   const card = useSelector((state) => state.card);
   const { currentUserId, isAdmin } = useSelector((state) => state.auth);
 
   const handleLike = (id) => {
     likesBlog(id, true);
     readMore(card.id);
-    setLike(!like);
   };
   const hendleDelete = (id) => {
     deleteBlog(id);
   };
+  useEffect(() => {
+    readMore(id);
+  }, []);
+
   return (
     <Container
       sx={{
-        height: "50rem",
         marginTop: "2rem",
-        marginBottom: "1px",
+        marginBottom: "2rem",
         display: "flex",
         justifyContent: "center",
       }}
     >
+      
       <Card
         sx={{
           width: "50%",
-          height: "90%",
           padding: 1,
           borderBottom: "1px solid  white",
         }}
@@ -114,7 +118,9 @@ const ReadMore = () => {
                 sx={{
                   backgroundColor: "red",
                   color: "white",
-                  marginRight: "0",
+                  position: "absolute",
+                  bottom: "1",
+                  right: "15rem",
                   "&:hover": { backgroundColor: "darkred" },
                 }}
                 onClick={() => hendleDelete(card.id)}

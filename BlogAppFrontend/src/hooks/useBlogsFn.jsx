@@ -36,7 +36,6 @@ const useCardsFn = () => {
     try {
       const { data } = await axiosWithToken.get(`/blogs/${id}/`);
       dispatch(readCards(data.result));
-      console.log(data);
     } catch (error) {
       console.log(error);
       notify(
