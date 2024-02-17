@@ -17,12 +17,10 @@ const ReadMore = () => {
 
   const card = useSelector((state) => state.card);
   const { currentUserId, isAdmin } = useSelector((state) => state.auth);
-  const [like, setLike] = useState(
-    card?.likes_n && card?.likes_n.includes(currentUserId)
-  );
+
   const handleLike = (id) => {
     likesBlog(id, true);
-    readMore(card._id);
+    readMore(card.id);
     setLike(!like);
   };
   const hendleDelete = (id) => {
@@ -86,7 +84,7 @@ const ReadMore = () => {
             <Box sx={{ display: "flex" }}>
               <FavoriteIcon
                 sx={{
-                  color: like ? "red" : "",
+                  color: card?.likes_n.includes(currentUserId) ? "red" : "",
                   fontSize: "2.5rem",
                   "&:hover": { cursor: "pointer" },
                 }}

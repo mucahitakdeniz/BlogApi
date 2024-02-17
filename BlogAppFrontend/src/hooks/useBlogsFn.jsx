@@ -65,7 +65,7 @@ const useCardsFn = () => {
       );
     }
   };
-  const likesBlog = async (id, read = true) => {
+  const likesBlog = async (id, read = false) => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.get(`blogs/like/${id}/`);

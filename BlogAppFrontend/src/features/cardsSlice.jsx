@@ -16,10 +16,10 @@ const cardsSlice = createSlice({
     slug: null,
     comments: null,
     category_name: null,
-    likes: null,
+    likes: [],
     post_views: null,
     comment_count: null,
-    likes_n: null,
+    likes_n: [],
     createds: null,
   },
   reducers: {
