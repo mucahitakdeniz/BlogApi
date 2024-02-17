@@ -10,20 +10,23 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import useCardsFn from "../hooks/useBlogsFn";
-import {  useState } from "react";
+import { useState } from "react";
 
 const ReadMore = () => {
-  const { likesBlog, readMore } = useCardsFn();
+  const { likesBlog, readMore, deleteBlog } = useCardsFn();
 
   const card = useSelector((state) => state.card);
-  const { currentUserId } = useSelector((state) => state.auth);
+  const { currentUserId, isAdmin } = useSelector((state) => state.auth);
   const [like, setLike] = useState(
     card?.likes_n && card?.likes_n.includes(currentUserId)
   );
   const handleLike = (id) => {
     likesBlog(id, true);
-    readMore(card);
+    readMore(card._id);
     setLike(!like);
+  };
+  const hendleDelete = (id) => {
+    deleteBlog(id);
   };
   return (
     <Container
@@ -108,16 +111,19 @@ const ReadMore = () => {
                 {card.post_views}
               </Typography>
             </Box>
-            <Button
-              sx={{
-                backgroundColor: "red",
-                color: "white",
-                marginLeft: "1rem",
-              }}
-              onClick={() => handleReadMore(item._id)}
-            >
-              Delete{" "}
-            </Button>
+            {isAdmin && (
+              <Button
+                sx={{
+                  backgroundColor: "red",
+                  color: "white",
+                  marginRight: "0",
+                  "&:hover": { backgroundColor: "darkred" },
+                }}
+                onClick={() => hendleDelete(card.id)}
+              >
+                Delete Blog
+              </Button>
+            )}
           </Box>
         </CardActions>
       </Card>

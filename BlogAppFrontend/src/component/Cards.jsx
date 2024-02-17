@@ -20,6 +20,7 @@ const Cards = ({ blogsData }) => {
   const handleReadMore = (id) => {
     if (currentUser) {
       readMore(id);
+      navigate("/readmore");
     } else {
       notify("Bu işlemi yapmak için giriş yapmalısın", "error");
       navigate("login");
@@ -94,7 +95,7 @@ const Cards = ({ blogsData }) => {
                 <Box sx={{ display: "flex" }}>
                   <FavoriteIcon
                     sx={{
-                      "color": item.likes_n.includes(currentUserId) ? "red" : "",
+                      color: item.likes_n.includes(currentUserId) ? "red" : "",
                       "&:hover": {
                         cursor: "pointer",
                       },

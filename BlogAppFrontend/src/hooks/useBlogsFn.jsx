@@ -37,7 +37,6 @@ const useCardsFn = () => {
       const { data } = await axiosWithToken.get(`/blogs/${id}/`);
       dispatch(readCards(data.result));
       console.log(data);
-      navigate("/readmore");
     } catch (error) {
       console.log(error);
       notify(
@@ -84,6 +83,7 @@ const useCardsFn = () => {
       await axiosWithToken.delete(`/blogs/${id}`);
       dispatch(deleteBlogSuccess());
       notify("Blog başarıyla silindi", "success");
+      navigate("/");
     } catch (error) {
       dispatch(fetchFail());
 

@@ -82,6 +82,7 @@ const cardsSlice = createSlice({
       state.post_views = null;
       state.comment_count = null;
       state.likes_n = null;
+      state.createds = null;
     },
 
     fetchFail: (state) => {
