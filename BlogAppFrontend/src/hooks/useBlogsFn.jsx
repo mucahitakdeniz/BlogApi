@@ -52,6 +52,7 @@ const useCardsFn = () => {
     try {
       const { data } = await axiosWithToken.post(`$/blogs/`, blog);
       dispatch(createBlogSuccess(data));
+
       notify("Blog oluşturma işlemi başarılı", "success");
       navigate("/");
     } catch (error) {

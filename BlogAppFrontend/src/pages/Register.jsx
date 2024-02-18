@@ -16,14 +16,14 @@ import { Link } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
 
 const Register = () => {
-  const { register, login } = useAuthCall();
+  const { register } = useAuthCall();
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
   const RegisterSchema = object({
     email: string()
       .email("Lütfen geçerli bir e-posta adresi giriniz!")
       .required("Bu alan boş kırakılamaz"),
-    username: string()
+    user_name: string()
       .required("Bu alan boş kırakılamaz")
       .max(150, "User name 150 karakretden büyük olamaz"),
     first_name: string()
@@ -84,7 +84,7 @@ const Register = () => {
 
           <Formik
             initialValues={{
-              username: "",
+              user_name: "",
               first_name: "",
               last_name: "",
               email: "",
@@ -97,7 +97,6 @@ const Register = () => {
             onSubmit={(values, actions) => {
               register(values);
               const user = { email: values.email, password: values.password };
-              login(user);
               actions.resetForm();
               actions.setSubmitting(false);
             }}
@@ -124,14 +123,14 @@ const Register = () => {
                   </Typography>
                   <TextField
                     type="text"
-                    name="username"
+                    name="user_name"
                     label="User Name"
                     variant="outlined"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.username}
-                    error={touched.username && Boolean(errors.username)}
-                    helperText={errors.username}
+                    value={values.user_name}
+                    error={touched.user_name && Boolean(errors.user_name)}
+                    helperText={errors.user_name}
                     sx={{ width: "100%" }}
                   />
                   <TextField

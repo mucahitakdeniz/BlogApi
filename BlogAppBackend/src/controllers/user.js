@@ -50,9 +50,12 @@ module.exports = {
       await Token.create({ token: token, user_id: data.id });
       res.status(201).send({
         error: false,
-        data,
         body: req.body,
-        token: token,
+        token: token.token,
+        user_id: data?._id,
+        user_name: data?.user_name,
+        is_admin: data?.is_admin,
+        image: data?.image,
       });
     }
   },

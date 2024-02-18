@@ -48,8 +48,10 @@ const useAuthCall = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.post(`/users/`, user);
+      console.log(data);
       dispatch(registerSuccess(data));
       notify("Kayıt işlemi başarılı ", "success");
+      navigate("/");
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());

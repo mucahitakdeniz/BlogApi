@@ -35,6 +35,11 @@ const authSlice = createSlice({
       state.loading = false;
       state.currentUser = payload?.user;
       state.token = payload?.token;
+      state.currentUser = payload?.user_name;
+      state.currentUserId = payload?.user_id;
+      state.token = payload?.token;
+      state.isAdmin = payload?.is_admin;
+      state.image = payload?.image
     },
     fetchFail: (state) => {
       state.loading = false;
