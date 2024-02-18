@@ -34,7 +34,8 @@ module.exports = {
               user_id: user._id,
               user_name: user?.user_name,
               is_admin: user.is_admin,
-              image: user?.image,
+              is_active: user.is_active,
+              image: user.image || null,
             });
           } else {
             const token = passwordEncrypt(user._id + new Date());
@@ -49,7 +50,8 @@ module.exports = {
               user_id: user._id,
               user_name: user?.user_name,
               is_admin: user.is_admin,
-              image: user?.image,
+              image: user?.image || null,
+              is_active: user.is_active,
             });
           }
         } else {

@@ -78,7 +78,7 @@ module.exports = {
             }
         */
     const currentBlog = await Blog.findOne({ _id: req.params.id });
-    if (req.user._id == currentBlog._id || req.user.is_admin) {
+    if (req.user._id == currentBlog.author_id || req.user.is_admin) {
       const data = await Blog.updateOne({ _id: req.params.id }, req.body);
       res.status(202).send({
         error: false,

@@ -56,6 +56,7 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: String,
       trim: true,
+      default:""
     },
     bio: {
       type: String,

@@ -15,7 +15,7 @@ import { notify } from "../helper/sweetaAlert";
 
 const Cards = ({ blogsData }) => {
   const { likesBlog } = useCardsFn();
-  const { currentUser, currentUserId } = useSelector((state) => state.auth);
+  const { currentUser, currentUserId,isActive } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleReadMore = (id) => {
     if (currentUser) {
@@ -136,7 +136,7 @@ const Cards = ({ blogsData }) => {
                   </Typography>
                 </Box>
               </Box>
-              <Button
+              {isActive && <Button
                 sx={{
                   backgroundColor: "lightgreen",
                   marginLeft: "5rem",
@@ -145,7 +145,7 @@ const Cards = ({ blogsData }) => {
                 onClick={() => handleReadMore(item._id)}
               >
                 Read More
-              </Button>
+              </Button>}
             </CardActions>
           </Card>
         </Grid>

@@ -74,6 +74,12 @@ const useCardsFn = () => {
       }
     } catch (error) {
       dispatch(fetchFail());
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Beğenme işleminde bir hata oluştu.",
+        "error"
+      );
     }
   };
   const deleteBlog = async (id) => {

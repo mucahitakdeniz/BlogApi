@@ -9,6 +9,7 @@ const authSlice = createSlice({
     error: false,
     token: null,
     isAdmin: false,
+    isActive: false,
     image: null,
   },
   reducers: {
@@ -23,23 +24,26 @@ const authSlice = createSlice({
       state.currentUserId = payload?.user_id;
       state.token = payload?.token;
       state.isAdmin = payload?.is_admin;
+      state.isActive = payload?.is_active;
       state.image = payload?.image;
     },
     logoutSuccess: (state) => {
       state.loading = false;
-      state;
       state.currentUser = null;
       state.token = null;
+      state.currentUserId = null;
+      state.isAdmin = null;
+      state.isActive = null;
+      state.image = null;
     },
     registerSuccess: (state, { payload }) => {
       state.loading = false;
-      state.currentUser = payload?.user;
-      state.token = payload?.token;
       state.currentUser = payload?.user_name;
       state.currentUserId = payload?.user_id;
       state.token = payload?.token;
       state.isAdmin = payload?.is_admin;
-      state.image = payload?.image
+      state.isActive = payload?.is_active;
+      state.image = payload?.image;
     },
     fetchFail: (state) => {
       state.loading = false;
