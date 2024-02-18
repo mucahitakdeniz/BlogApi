@@ -8,17 +8,20 @@ import { Box, Button, Container } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import useCardsFn from "../hooks/useBlogsFn";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const ReadMore = () => {
   const { likesBlog, readMore, deleteBlog } = useCardsFn();
   const { id } = useParams();
-  const navigate = useNavigate();
   const card = useSelector((state) => state.card);
-  const { currentUserId, isAdmin } = useSelector((state) => state.auth);
+  const { currentUserId, isAdmin, currentUser } = useSelector(
+    (state) => state.auth
+  );
 
   const handleLike = (id) => {
     likesBlog(id, true);
@@ -40,7 +43,6 @@ const ReadMore = () => {
         justifyContent: "center",
       }}
     >
-      
       <Card
         sx={{
           width: "50%",
@@ -83,7 +85,7 @@ const ReadMore = () => {
           </CardContent>
         </CardContent>
 
-        <CardActions>
+        <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", gap: "2rem" }}>
             <Box sx={{ display: "flex" }}>
               <FavoriteIcon
@@ -113,20 +115,31 @@ const ReadMore = () => {
                 {card.post_views}
               </Typography>
             </Box>
-            {isAdmin && (
-              <Button
+          </Box>
+          <Box>
+            {(isAdmin || card.author == currentUser) && (
+              <ModeEditIcon
                 sx={{
-                  backgroundColor: "red",
-                  color: "white",
-                  position: "absolute",
-                  bottom: "1",
-                  right: "15rem",
-                  "&:hover": { backgroundColor: "darkred" },
+                  color: "darkgreen",
+                  fontSize: "2.5rem",
+                  marginRight:3
+,                  "&:hover": { color: "blue", cursor: "pointer" },
                 }}
                 onClick={() => hendleDelete(card.id)}
-              >
-                Delete Blog
-              </Button>
+              />
+            )}
+
+            {(isAdmin || card.author == currentUser) && (
+              <DeleteIcon
+                sx={{
+                  color: "darkred",
+                  fontSize: "2.5rem",
+                  marginRight:3,
+
+                  "&:hover": { color: "darkmagenta", cursor: "pointer" },
+                }}
+                onClick={() => hendleDelete(card.id)}
+              />
             )}
           </Box>
         </CardActions>
