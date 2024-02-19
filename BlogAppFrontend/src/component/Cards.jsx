@@ -144,7 +144,7 @@ const Cards = ({ blogsData }) => {
                 }}
                 onClick={() => handleReadMore(item._id)}
               >
-                Read More
+                Daha Fazla
               </Button>}
             </CardActions>
           </Card>
