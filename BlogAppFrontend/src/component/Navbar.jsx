@@ -6,7 +6,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useState } from "react";
-import { Link } from "@mui/material";
+import { Avatar, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuthCall from "../hooks/useAuthCall";
@@ -17,7 +17,7 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { logout } = useAuthCall();
 
-  const user = useSelector((state) => state.auth);
+  const { currentUser, image } = useSelector((state) => state.auth);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -29,10 +29,10 @@ const Navbar = () => {
   };
 
   return (
-    <Box sx={{ with: "100%" }}>
+    <Box sx={{ with: "100%", height: "8rem" }}>
       <AppBar
         position="static"
-        sx={{ with: "100%", height: "5rem", backgroundColor: "lightseagreen" }}
+        sx={{ with: "100%", height: "8rem", backgroundColor: "lightseagreen" }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -73,22 +73,16 @@ const Navbar = () => {
           <Box>
             {auth && (
               <div>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle
+               
+                  <Avatar
+                    src={image}
                     sx={{
-                      fontSize: "2.5rem",
-                      padding: "0.5rem",
-                      border: "none",
+                      width: "5rem",
+                      height: "5rem",
+                      marginTop:"1rem","&:hover":{cursor:"pointer"}
                     }}
+                    onClick={handleMenu}
                   />
-                </IconButton>
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -104,7 +98,7 @@ const Navbar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  {user.currentUser ? (
+                  {currentUser ? (
                     [
                       <MenuItem
                         key="my-blog"

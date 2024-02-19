@@ -12,7 +12,7 @@ const NewBlog = () => {
   const { createBlog, getCategories } = useBlogsFn();
 
   const { categories } = useSelector((state) => state.blogs);
-  const status = ["Draft", "Published"];
+  const status = ["Draft", "Publish"];
   const handleChange = (e) => {
     setNewBlogInfo({
       ...newBlogInfo,
@@ -23,12 +23,12 @@ const NewBlog = () => {
     title: "",
     content: "",
     image: "",
-    category: "",
+    category_id: "",
     status: "",
   });
-  const [showCategory, setshowCategory] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(newBlogInfo);
     createBlog(newBlogInfo);
     setNewBlogInfo({
       title: "",
@@ -39,9 +39,9 @@ const NewBlog = () => {
     });
   };
   useEffect(() => {
-    getCategories()
-  }, [])
-  
+    getCategories();
+  }, []);
+
   return (
     <Box sx={{ width: "25rem", margin: "auto", marginTop: "3rem" }}>
       <Box
@@ -80,18 +80,15 @@ const NewBlog = () => {
           </InputLabel>
           <Select
             labelId="category-select-label"
-            label="category"
+            label="Category"
             id="category-select"
-            name="category"
-            value={newBlogInfo.category == 0 ? "0" : newBlogInfo.category}
+            name="category_id"
             required
             onChange={handleChange}
           >
-            <MenuItem onClick={() => navigate("/newblog/categorys")} />
-            Please Choose
             {categories?.map((item, i) => {
               return (
-                <MenuItem key={i} value={i}>
+                <MenuItem key={i} value={item._id}>
                   {item.name}
                 </MenuItem>
               );
@@ -132,12 +129,12 @@ const NewBlog = () => {
           variant="outlined"
           required
           multiline
-          rows={2}
+          rows={4}
           onChange={handleChange}
         />
 
-        <Button variant="contained" type="submit">
-          New Blog
+        <Button variant="contained" type="submit" sx={{ marginTop: "1rem" }}>
+          Yeni Blog
         </Button>
       </Box>
     </Box>

@@ -99,7 +99,7 @@ module.exports = {
             #swagger.summary = "Delete Blog"
         */
     const currentBlog = await Blog.findOne({ _id: req.params.id });
-    if (req.user._id == currentBlog._id || req.user.is_admin) {
+    if (req.user._id.equals(currentBlog.author_id) || req.user.is_admin) {
       const data = await Blog.deleteOne({ _id: req.params.id });
       res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
     } else {

@@ -3,7 +3,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Dashboard from "../component/Dashboard";
-import About from "../component/About";
+import About from "../pages/About";
 import ReadMore from "../component/ReadMore";
 import PrivateRouter from "./PrivateRouter";
 import Profile from "../pages/Profile";

@@ -61,7 +61,7 @@ const useCardsFn = () => {
   const createBlog = async (blog) => {
     dispatch(fetchBlogStart());
     try {
-      const { data } = await axiosWithToken.post(`$/blogs/`, blog);
+      const { data } = await axiosWithToken.post(`/blogs/`, blog);
       dispatch(createBlogSuccess(data));
 
       notify("Blog oluşturma işlemi başarılı", "success");

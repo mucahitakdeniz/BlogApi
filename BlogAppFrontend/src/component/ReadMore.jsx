@@ -90,7 +90,10 @@ const ReadMore = () => {
             <Box sx={{ display: "flex" }}>
               <FavoriteIcon
                 sx={{
-                  color: card?.likes_n.includes(currentUserId) ? "red" : "",
+                  color:
+                    card.likes_n && card.likes_n.includes(currentUserId)
+                      ? "red"
+                      : "",
                   fontSize: "2.5rem",
                   "&:hover": { cursor: "pointer" },
                 }}
@@ -122,8 +125,8 @@ const ReadMore = () => {
                 sx={{
                   color: "darkgreen",
                   fontSize: "2.5rem",
-                  marginRight:3
-,                  "&:hover": { color: "blue", cursor: "pointer" },
+                  marginRight: 3,
+                  "&:hover": { color: "blue", cursor: "pointer" },
                 }}
                 onClick={() => hendleDelete(card.id)}
               />
@@ -134,7 +137,7 @@ const ReadMore = () => {
                 sx={{
                   color: "darkred",
                   fontSize: "2.5rem",
-                  marginRight:3,
+                  marginRight: 3,
 
                   "&:hover": { color: "darkmagenta", cursor: "pointer" },
                 }}
