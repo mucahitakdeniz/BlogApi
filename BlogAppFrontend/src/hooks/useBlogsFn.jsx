@@ -1,14 +1,15 @@
 import {
-  fetchFail,
-  fetchStart,
   readCards,
   createBlogSuccess,
   deleteBlogSuccess,
+  fetchFail,
+  fetchStart,
 } from "../features/cardsSlice";
 import {
-  getBlogsFail,
-  getBlogsStart,
   getBlogsSuccess,
+  fetchBlogFail,
+  fetchBlogStart,
+  getCategoriesSuccess,
 } from "../features/blogSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,13 +22,23 @@ const useCardsFn = () => {
   const dispatch = useDispatch();
 
   const getBlogs = async () => {
-    dispatch(getBlogsStart());
+    dispatch(fetchBlogStart());
     try {
       const { data } = await axiosWithToken.get(`/blogs`);
       dispatch(getBlogsSuccess(data));
     } catch (error) {
       console.log(error);
-      dispatch(getBlogsFail());
+      dispatch(fetchBlogFail());
+    }
+  };
+  const getCategories = async () => {
+    dispatch(fetchBlogStart());
+    try {
+      const { data } = await axiosWithToken.get(`/categories`);
+      dispatch(getCategoriesSuccess(data.result));
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchBlogFail());
     }
   };
 
@@ -48,7 +59,7 @@ const useCardsFn = () => {
     }
   };
   const createBlog = async (blog) => {
-    dispatch(fetchStart());
+    dispatch(fetchBlogStart());
     try {
       const { data } = await axiosWithToken.post(`$/blogs/`, blog);
       dispatch(createBlogSuccess(data));
@@ -56,7 +67,7 @@ const useCardsFn = () => {
       notify("Blog oluşturma işlemi başarılı", "success");
       navigate("/");
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchBlogFail());
       notify(
         error?.response?.data.message
           ? error.response.data.message
@@ -83,7 +94,7 @@ const useCardsFn = () => {
     }
   };
   const deleteBlog = async (id) => {
-    dispatch(fetchStart());
+    dispatch(fetchBlogStart());
 
     try {
       await axiosWithToken.delete(`/blogs/${id}`);
@@ -91,7 +102,7 @@ const useCardsFn = () => {
       notify("Blog başarıyla silindi", "success");
       navigate("/");
     } catch (error) {
-      dispatch(fetchFail());
+      dispatch(fetchBlogFail());
 
       notify(
         error?.response?.data.message
@@ -102,6 +113,13 @@ const useCardsFn = () => {
       console.log(error);
     }
   };
-  return { readMore, createBlog, likesBlog, deleteBlog, getBlogs };
+  return {
+    readMore,
+    createBlog,
+    likesBlog,
+    deleteBlog,
+    getBlogs,
+    getCategories,
+  };
 };
 export default useCardsFn;

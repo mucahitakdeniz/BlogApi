@@ -1,23 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import {FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useBlogsFn from "../hooks/useBlogsFn";
+import { useSelector } from "react-redux";
 
 const NewBlog = () => {
   const navigate = useNavigate();
-  const { createBlog } = useBlogsFn();
+  const { createBlog, getCategories } = useBlogsFn();
 
-  const category = [
-    "Trivia",
-    "Travel",
-    "Web development",
-    "Al",
-    "Science",
-    "Fashion",
-  ];
+  const { categories } = useSelector((state) => state.blogs);
   const status = ["Draft", "Published"];
   const handleChange = (e) => {
     setNewBlogInfo({
@@ -44,6 +38,10 @@ const NewBlog = () => {
       status: "",
     });
   };
+  useEffect(() => {
+    getCategories()
+  }, [])
+  
   return (
     <Box sx={{ width: "25rem", margin: "auto", marginTop: "3rem" }}>
       <Box
@@ -85,16 +83,16 @@ const NewBlog = () => {
             label="category"
             id="category-select"
             name="category"
-            value={newBlogInfo.category==0 ? "0" : newBlogInfo.category}
+            value={newBlogInfo.category == 0 ? "0" : newBlogInfo.category}
             required
             onChange={handleChange}
           >
-            <MenuItem onClick={() => navigate("/newblog/categorys")}/>
-              Please Choose
-            {category?.map((item, i) => {
+            <MenuItem onClick={() => navigate("/newblog/categorys")} />
+            Please Choose
+            {categories?.map((item, i) => {
               return (
                 <MenuItem key={i} value={i}>
-                  {item}
+                  {item.name}
                 </MenuItem>
               );
             })}
@@ -113,7 +111,7 @@ const NewBlog = () => {
             required
             onChange={handleChange}
           >
-            <MenuItem onClick={() => navigate("/newblog/status")}/>
+            <MenuItem onClick={() => navigate("/newblog/status")} />
 
             {status.map((item, i) => {
               return (

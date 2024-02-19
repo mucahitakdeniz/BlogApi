@@ -6,13 +6,14 @@ const blogSlace = createSlice({
     loading: false,
     error: false,
     blogsData: [],
+    categories: [],
   },
   reducers: {
-    getBlogsStart: (state) => {
+    fetchBlogStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-    getBlogsFail: (state) => {
+    fetchBlogFail: (state) => {
       state.loading = false;
       state.error = true;
     },
@@ -20,8 +21,16 @@ const blogSlace = createSlice({
       state.loading = false;
       state.blogsData = payload;
     },
+    getCategoriesSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.categories = payload;
+    },
   },
 });
-export const { getBlogsFail, getBlogsStart, getBlogsSuccess } =
-  blogSlace.actions;
+export const {
+  fetchBlogFail,
+  fetchBlogStart,
+  getBlogsSuccess,
+  getCategoriesSuccess,
+} = blogSlace.actions;
 export default blogSlace.reducer;
