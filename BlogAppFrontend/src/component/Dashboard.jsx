@@ -3,14 +3,19 @@ import Cards from "./Cards";
 import useBloggsFn from "../hooks/useBlogsFn";
 import { useSelector } from "react-redux";
 
-const Dashboard = () => {
+const Dashboard = ({ search }) => {
   const { blogsData } = useSelector((state) => state.blogs);
   const { getBlogs } = useBloggsFn();
+  console.log(search);
   useEffect(() => {
     getBlogs();
   }, []);
-
-  return <Cards blogsData={blogsData} />;
+  const filterBlogs = search
+    ? blogsData.filter((blog) =>
+        blog.content.toLowerCase().includes(search.toLowerCase())
+      )
+    : blogsData;
+  return <Cards blogsData={filterBlogs} />;
 };
 
 export default Dashboard;

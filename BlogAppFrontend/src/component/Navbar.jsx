@@ -1,8 +1,6 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useState } from "react";
@@ -10,8 +8,9 @@ import { Avatar, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuthCall from "../hooks/useAuthCall";
+import SearchAppBar from "./SearchAppBar";
 
-const Navbar = () => {
+const Navbar = ({setSearch}) => {
   const navigate = useNavigate();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -27,14 +26,19 @@ const Navbar = () => {
     setAnchorEl(null);
     setAuth(true);
   };
-
   return (
     <Box sx={{ with: "100%", height: "8rem" }}>
       <AppBar
         position="static"
         sx={{ with: "100%", height: "8rem", backgroundColor: "lightseagreen" }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "1rem",
+          }}
+        >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <img
               src="https://lms.clarusway.com/pluginfile.php/1/core_admin/logocompact/300x300/1688763931/clarusway_LOGO_tek_png.png"
@@ -49,7 +53,7 @@ const Navbar = () => {
               marginX={1}
               href="/"
             >
-              Dashboard
+              Ana Sayfa{" "}
             </Link>
             <Link
               color="#01020c"
@@ -58,7 +62,7 @@ const Navbar = () => {
               marginX={1}
               href="/newblog"
             >
-              New Blog
+              Yeni Blog{" "}
             </Link>
             <Link
               color="#01020c"
@@ -67,22 +71,22 @@ const Navbar = () => {
               marginX={1}
               href="/about"
             >
-              About
+              Hakkında
             </Link>
           </Box>
           <Box>
             {auth && (
               <div>
-               
-                  <Avatar
-                    src={image}
-                    sx={{
-                      width: "5rem",
-                      height: "5rem",
-                      marginTop:"1rem","&:hover":{cursor:"pointer"}
-                    }}
-                    onClick={handleMenu}
-                  />
+                <Avatar
+                  src={image}
+                  sx={{
+                    width: "4rem",
+                    height: "4rem",
+                    marginTop: "1rem",
+                    "&:hover": { cursor: "pointer" },
+                  }}
+                  onClick={handleMenu}
+                />
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -107,7 +111,7 @@ const Navbar = () => {
                           navigate("myblog");
                         }}
                       >
-                        My Blog
+                        Bloglarım{" "}
                       </MenuItem>,
                       <MenuItem
                         key="profile"
@@ -116,15 +120,21 @@ const Navbar = () => {
                           navigate("/profile");
                         }}
                       >
-                        Profile
+                        Profil{" "}
                       </MenuItem>,
-                      <MenuItem key="logout" onClick={() => logout()}>
-                        Log Out
+                      <MenuItem
+                        key="logout"
+                        onClick={() => {
+                          logout();
+                          handleClose();
+                        }}
+                      >
+                        Çıkiş
                       </MenuItem>,
                     ]
                   ) : (
                     <MenuItem onClick={() => navigate("/login")}>
-                      Login
+                      Giriş yap
                     </MenuItem>
                   )}
                 </Menu>
@@ -132,6 +142,7 @@ const Navbar = () => {
             )}
           </Box>
         </Toolbar>
+        <SearchAppBar setSearch={setSearch} />
       </AppBar>
     </Box>
   );
