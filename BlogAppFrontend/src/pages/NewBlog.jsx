@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -28,7 +28,6 @@ const NewBlog = () => {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newBlogInfo);
     createBlog(newBlogInfo);
     setNewBlogInfo({
       title: "",

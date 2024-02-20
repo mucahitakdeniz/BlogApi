@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 const Dashboard = ({ search }) => {
   const { blogsData } = useSelector((state) => state.blogs);
   const { getBlogs } = useBloggsFn();
-  console.log(search);
   useEffect(() => {
     getBlogs();
   }, []);

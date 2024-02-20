@@ -12,8 +12,9 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import useCardsFn from "../hooks/useBlogsFn";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import EditModal from "./EditModal";
 
 const ReadMore = () => {
   const { likesBlog, readMore, deleteBlog } = useCardsFn();
@@ -30,6 +31,12 @@ const ReadMore = () => {
   const hendleDelete = (id) => {
     deleteBlog(id);
   };
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     readMore(id);
   }, []);
@@ -43,6 +50,7 @@ const ReadMore = () => {
         justifyContent: "center",
       }}
     >
+      <EditModal open={open} card={card} handleClose={handleClose} />
       <Card
         sx={{
           width: "50%",
@@ -128,7 +136,7 @@ const ReadMore = () => {
                   marginRight: 3,
                   "&:hover": { color: "blue", cursor: "pointer" },
                 }}
-                onClick={() => hendleDelete(card.id)}
+                onClick={handleOpen}
               />
             )}
 
