@@ -76,6 +76,24 @@ const useCardsFn = () => {
       );
     }
   };
+  const updateBlog = async (blog) => {
+    dispatch(fetchBlogStart());
+    try {
+      const { data } = await axiosWithToken.put(`/blogs/${blog._id}`, blog);
+      dispatch(createBlogSuccess(data));
+
+      notify("Blog başarıyla güncellendi", "success");
+      window.location.reload();
+    } catch (error) {
+      dispatch(fetchBlogFail());
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Blog güncelleme işleminde bir hata oluştu. Lütfen tekrar deneyiniz",
+        "error"
+      );
+    }
+  };
   const likesBlog = async (id, read = false) => {
     dispatch(fetchStart());
     try {
@@ -120,6 +138,7 @@ const useCardsFn = () => {
     deleteBlog,
     getBlogs,
     getCategories,
+    updateBlog,
   };
 };
 export default useCardsFn;

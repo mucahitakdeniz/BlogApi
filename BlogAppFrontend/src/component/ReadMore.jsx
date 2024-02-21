@@ -31,15 +31,43 @@ const ReadMore = () => {
   const hendleDelete = (id) => {
     deleteBlog(id);
   };
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setInfo({
+      title: card?.title,
+      image: card?.image,
+      content: card?.content,
+      _id: card?.id,
+      status: card?.status,
+      category_id: card?.category?._id,
+    });
+    setOpen(true);
+  };
 
   const handleClose = () => {
     setOpen(false);
+    setInfo({
+      title: "",
+      image: "",
+      content: "",
+      _id: "",
+      status: "",
+      category_id: "",
+    });
   };
+  const [info, setInfo] = useState({
+    title: card?.title,
+    image: card?.image,
+    content: card?.content,
+    _id: card?.id,
+    status: card?.status,
+    category_id: card?.category?._id,
+  });
+  
   const [open, setOpen] = useState(false);
   useEffect(() => {
     readMore(id);
-  }, []);
+    console.log("deneme");
+  }, [id]);
 
   return (
     <Container
@@ -50,7 +78,7 @@ const ReadMore = () => {
         justifyContent: "center",
       }}
     >
-      <EditModal open={open} card={card} handleClose={handleClose} />
+      <EditModal open={open} info={info} setInfo={setInfo} handleClose={handleClose} />
       <Card
         sx={{
           width: "50%",
@@ -58,19 +86,22 @@ const ReadMore = () => {
           borderBottom: "1px solid  white",
         }}
       >
-        <CardMedia
-          sx={{
-            height: "20rem",
-            maxwidth: "20rem",
-            padding: 1,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            margin: "auto",
-          }}
-          image={card.image}
-          title={card.title}
-        />
         <CardContent>
+          <CardMedia
+            sx={{
+              height: "20rem",
+              maxwidth: "20rem",
+              padding: 1,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              margin: "auto",
+            }}
+            image={card?.image}
+            title={card?._id}
+            component="div"
+          />
+          <CardContent></CardContent>
+
           <Typography gutterBottom variant="h5" component="div">
             {card.title}
           </Typography>

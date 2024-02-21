@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -10,6 +11,7 @@ import Modal from "@mui/material/Modal";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useBlogsFn from "../hooks/useBlogsFn";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -17,7 +19,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "24rem",
-  height: "27rem",
   bgcolor: "background.paper",
   border: "5px solid #000",
   boxShadow: 24,
@@ -27,9 +28,10 @@ const style = {
   gap: 2,
 };
 
-export default function EditModal({ open, card, handleClose }) {
+export default function EditModal({ open, info, setInfo, handleClose }) {
   const { categories } = useSelector((state) => state.blogs);
-  const { getCategories } = useBlogsFn();
+  const { getCategories, updateBlog } = useBlogsFn();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInfo({
@@ -37,19 +39,15 @@ export default function EditModal({ open, card, handleClose }) {
       [e.target.name]: e.target.value,
     });
   };
-  const [info, setInfo] = useState({
-    id: card.id,
-    title: card.title,
-    content: card.content,
-    image: card.image,
-    category_id: card.category_id_id,
-    status: card.status,
-  });
+  const handleSubmit = () => {
+    updateBlog(info);
+    handleClose();
+    navigate(`/readmore/${info._id}`);
+  };
   const status = ["Draft", "Publish"];
   useEffect(() => {
     getCategories();
   }, []);
-
   return (
     <div>
       <Modal
@@ -79,16 +77,7 @@ export default function EditModal({ open, card, handleClose }) {
             onChange={handleChange}
             required
           />
-          <TextField
-            label="İçerik"
-            name="content"
-            id="content"
-            type="text"
-            variant="outlined"
-            value={info?.content}
-            onChange={handleChange}
-            required
-          />
+
           <FormControl>
             <InputLabel variant="outlined" id="category-select-label">
               Category
@@ -98,14 +87,14 @@ export default function EditModal({ open, card, handleClose }) {
               label="Category"
               id="category-select"
               name="category_id"
-              value={card.category.name}
+              value={info?.category_id}
               required
               onChange={handleChange}
             >
               {categories?.map((item) => {
                 return (
-                  <MenuItem key={item._id} value={item._id}>
-                    {item.name}
+                  <MenuItem key={item?._id} value={item?._id}>
+                    {item?.name}
                   </MenuItem>
                 );
               })}
@@ -135,6 +124,26 @@ export default function EditModal({ open, card, handleClose }) {
               })}
             </Select>
           </FormControl>
+          <TextField
+            label="İçerik"
+            name="content"
+            id="content"
+            type="text"
+            variant="outlined"
+            value={info?.content}
+            onChange={handleChange}
+            required
+            multiline
+            rows={4}
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ marginTop: "1rem" }}
+            onClick={handleSubmit}
+          >
+            Gönder
+          </Button>
         </Box>
       </Modal>
     </div>

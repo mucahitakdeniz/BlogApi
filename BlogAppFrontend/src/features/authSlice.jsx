@@ -18,7 +18,6 @@ const authSlice = createSlice({
       state.error = false;
     },
     loginSuccess: (state, { payload }) => {
-      console.log(payload);
       state.loading = false;
       state.currentUser = payload?.user_name;
       state.currentUserId = payload?.user_id;
