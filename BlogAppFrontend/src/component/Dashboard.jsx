@@ -6,14 +6,16 @@ import { useSelector } from "react-redux";
 const Dashboard = ({ search }) => {
   const { blogsData } = useSelector((state) => state.blogs);
   const { getBlogs } = useBloggsFn();
+  const filterBlogs = blogsData.filter(
+    (blog) =>
+      blog.content.toLowerCase().includes(search?.toLowerCase() || '') &&
+      blog.status === "p"
+  );
+  
   useEffect(() => {
     getBlogs();
   }, []);
-  const filterBlogs = search
-    ? blogsData.filter((blog) =>
-        blog.content.toLowerCase().includes(search.toLowerCase())
-      )
-    : blogsData;
+
   return <Cards blogsData={filterBlogs} />;
 };
 
