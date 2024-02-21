@@ -43,6 +43,7 @@ module.exports = {
             }
         */
     req.body.is_admin = false;
+    req.body.is_active = true;
 
     const data = await User.create(req.body);
     if (data.user_name) {
@@ -55,6 +56,7 @@ module.exports = {
         user_id: data?._id,
         user_name: data?.user_name,
         is_admin: data?.is_admin,
+        is_active: data?.is_active,
         image: data?.image,
       });
     }

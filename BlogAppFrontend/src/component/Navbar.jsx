@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import useAuthCall from "../hooks/useAuthCall";
 import SearchAppBar from "./SearchAppBar";
 
-const Navbar = ({setSearch}) => {
+const Navbar = ({ setSearch }) => {
   const navigate = useNavigate();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -52,6 +52,7 @@ const Navbar = ({setSearch}) => {
               underline="none"
               marginX={1}
               href="/"
+              sx={{ "&:hover": { color: "lightpink" } }}
             >
               Ana Sayfa{" "}
             </Link>
@@ -61,6 +62,7 @@ const Navbar = ({setSearch}) => {
               underline="none"
               marginX={1}
               href="/newblog"
+              sx={{ "&:hover": { color: "lightpink" } }}
             >
               Yeni Blog{" "}
             </Link>
@@ -70,6 +72,7 @@ const Navbar = ({setSearch}) => {
               underline="none"
               marginX={1}
               href="/about"
+              sx={{ "&:hover": { color: "lightpink" } }}
             >
               Hakkında
             </Link>
@@ -77,16 +80,28 @@ const Navbar = ({setSearch}) => {
           <Box>
             {auth && (
               <div>
-                <Avatar
-                  src={image}
-                  sx={{
-                    width: "4rem",
-                    height: "4rem",
-                    marginTop: "1rem",
-                    "&:hover": { cursor: "pointer" },
-                  }}
-                  onClick={handleMenu}
-                />
+                {image ? (
+                  <Avatar
+                    src={image}
+                    sx={{
+                      width: "4rem",
+                      height: "4rem",
+                      marginTop: "1rem",
+                      "&:hover": { cursor: "pointer" },
+                    }}
+                    onClick={handleMenu}
+                  />
+                ) : (
+                  <Avatar
+                    sx={{
+                      width: "4rem",
+                      height: "4rem",
+                      marginTop: "1rem",
+                      "&:hover": { cursor: "pointer" },
+                    }}
+                    onClick={handleMenu}
+                  />
+                )}
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}

@@ -15,7 +15,9 @@ import { notify } from "../helper/sweetaAlert";
 
 const Cards = ({ blogsData }) => {
   const { likesBlog } = useCardsFn();
-  const { currentUser, currentUserId,isActive } = useSelector((state) => state.auth);
+  const { currentUser, currentUserId, isActive } = useSelector(
+    (state) => state.auth
+  );
   const navigate = useNavigate();
   const handleReadMore = (id) => {
     if (currentUser) {
@@ -42,32 +44,35 @@ const Cards = ({ blogsData }) => {
     }
   };
   return (
-    <Grid container spacing={4} marginTop={5} marginBottom={7}>
+    <Grid container spacing={7} marginTop={4} marginBottom={7} >
       {blogsData?.map((item) => (
         <Grid item key={item._id} xs={12} sm={6} md={4}>
           <Card
             sx={{
-              padding: "1rem",
-              width: "17",
-              height: "30rem",
-              boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
+              padding: "1.2rem",
+              width: "21rem",
+              height: "40rem",
+              borderRadius: "1rem",
+              boxShadow: "5px 10px 18px rgba(3, 2, 2, 0.788)",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-              gap: "7px",
+              marginRight:"1rem"
+              
             }}
           >
             <CardMedia
               sx={{
-                height: "19rem",
-                width: "19rem",
-                padding: "1rem",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                width: "100%",
+                height: "50%",
+                objectFit: "cover",
                 margin: "auto",
+                marginTop: "2rem",
+                borderRadius: "1rem",
+                boxShadow: "0 10px 18px rgba(1, 8, 4, 0.788)"
               }}
               image={item.image}
               title={item.title}
+              component="img"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -99,11 +104,12 @@ const Cards = ({ blogsData }) => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Box sx={{ display: "flex", gap: "1rem" }}>
+              <Box sx={{ display: "flex", gap: "1rem", fontSize: "1.5rem" }}>
                 <Box sx={{ display: "flex" }}>
                   <FavoriteIcon
                     sx={{
                       color: item.likes_n.includes(currentUserId) ? "red" : "",
+                      fontSize: "2rem",
                       "&:hover": {
                         cursor: "pointer",
                       },
@@ -121,7 +127,7 @@ const Cards = ({ blogsData }) => {
                     sx={{
                       "&:hover": {
                         cursor: "pointer",
-                      },
+                      },fontSize: "2rem"
                     }}
                     onClick={() => handleComment(item._id)}
                   />
@@ -130,22 +136,27 @@ const Cards = ({ blogsData }) => {
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex" }}>
-                  <RemoveRedEyeIcon />
+                  <RemoveRedEyeIcon sx={{fontSize: "2rem",}}/>
                   <Typography variant="body3" color="text.secondary">
                     {item.post_views}
                   </Typography>
                 </Box>
               </Box>
-              {isActive && <Button
-                sx={{
-                  backgroundColor: "lightgreen",
-                  marginLeft: "5rem",
-                  "&:hover": { backgroundColor: "lightsalmon", color: "black" },
-                }}
-                onClick={() => handleReadMore(item._id)}
-              >
-                Daha Fazla
-              </Button>}
+              {isActive && (
+                <Button
+                  sx={{
+                    backgroundColor: "lightgreen",
+                    marginLeft: "5rem",
+                    "&:hover": {
+                      backgroundColor: "lightsalmon",
+                      color: "black",
+                    },
+                  }}
+                  onClick={() => handleReadMore(item._id)}
+                >
+                  Daha Fazla
+                </Button>
+              )}
             </CardActions>
           </Card>
         </Grid>

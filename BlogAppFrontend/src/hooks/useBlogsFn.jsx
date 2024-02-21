@@ -61,8 +61,8 @@ const useCardsFn = () => {
   const createBlog = async (blog) => {
     dispatch(fetchBlogStart());
     try {
-      const { data } = await axiosWithToken.post(`/blogs/`, blog);
-      dispatch(createBlogSuccess(data));
+      axiosWithToken.post(`/blogs/`, blog);
+      dispatch(createBlogSuccess());
 
       notify("Blog oluşturma işlemi başarılı", "success");
       navigate("/");
@@ -79,8 +79,8 @@ const useCardsFn = () => {
   const updateBlog = async (blog) => {
     dispatch(fetchBlogStart());
     try {
-      const { data } = await axiosWithToken.put(`/blogs/${blog._id}`, blog);
-      dispatch(createBlogSuccess(data));
+      await axiosWithToken.put(`/blogs/${blog._id}`, blog);
+      dispatch(createBlogSuccess());
 
       notify("Blog başarıyla güncellendi", "success");
       window.location.reload();

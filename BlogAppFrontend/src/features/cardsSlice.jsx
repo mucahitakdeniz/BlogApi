@@ -10,15 +10,12 @@ const cardsSlice = createSlice({
     content: null,
     image: null,
     category: null,
-    publish_date: null,
     author: null,
     status: null,
-    slug: null,
-    category: null,
     likes: null,
+    likes_n: [],
     post_views: null,
     comment_count: null,
-    likes_n: [],
     createds: null,
   },
   reducers: {
@@ -28,16 +25,14 @@ const cardsSlice = createSlice({
     },
 
     readCards: (state, { payload }) => {
+      console.log(payload);
       state.loading = false;
       state.id = payload?._id;
       state.title = payload?.title;
       state.content = payload?.content;
       state.image = payload?.image;
-      state.category = payload?.category;
-      state.publish_date = payload?.publish_date;
       state.author = payload?.author;
       state.status = payload?.status;
-      state.slug = payload?.slug;
       state.category = payload?.category_id;
       state.likes = payload?.likes;
       state.post_views = payload?.post_views;
@@ -45,22 +40,8 @@ const cardsSlice = createSlice({
       state.likes_n = payload?.likes_n;
       state.createds = payload?.createds;
     },
-    createBlogSuccess: (state, { payload }) => {
+    createBlogSuccess: (state) => {
       state.loading = false;
-      state.id = payload?._id;
-      state.title = payload?.title;
-      state.content = payload?.content;
-      state.image = payload?.image;
-      state.category = payload?.category;
-      state.publish_date = payload?.publish_date;
-      state.author = payload?.author;
-      state.status = payload?.status;
-      state.slug = payload?.slug;
-      state.category_name = payload?.category_name;
-      state.likes = payload?.likes;
-      state.post_views = payload?.post_views;
-      state.comment_count = payload?.comment_count;
-      state.likes_n = payload?.likes_n;
     },
     deleteBlogSuccess: (state) => {
       state.loading = false;
@@ -69,11 +50,8 @@ const cardsSlice = createSlice({
       state.content = null;
       state.image = null;
       state.category = null;
-      state.publish_date = null;
       state.author = null;
       state.status = null;
-      state.slug = null;
-      state.category = null;
       state.likes = null;
       state.post_views = null;
       state.comment_count = null;

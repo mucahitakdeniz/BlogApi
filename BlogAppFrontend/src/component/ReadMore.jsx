@@ -62,7 +62,7 @@ const ReadMore = () => {
     status: card?.status,
     category_id: card?.category?._id,
   });
-  
+
   const [open, setOpen] = useState(false);
   useEffect(() => {
     readMore(id);
@@ -78,29 +78,35 @@ const ReadMore = () => {
         justifyContent: "center",
       }}
     >
-      <EditModal open={open} info={info} setInfo={setInfo} handleClose={handleClose} />
+      <EditModal
+        open={open}
+        info={info}
+        setInfo={setInfo}
+        handleClose={handleClose}
+      />
       <Card
         sx={{
           width: "50%",
           padding: 1,
-          borderBottom: "1px solid  white",
+          borderRadius: "1rem",
+          boxShadow: "0 10px 18px rgba(14, 196, 38, 0.788)"
         }}
       >
         <CardContent>
           <CardMedia
             sx={{
-              height: "20rem",
-              maxwidth: "20rem",
-              padding: 1,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
               margin: "auto",
+              marginBottom: "1rem",
+              borderRadius: "1rem",
+              boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
             }}
             image={card?.image}
             title={card?._id}
-            component="div"
+            component="img"
           />
-          <CardContent></CardContent>
 
           <Typography gutterBottom variant="h5" component="div">
             {card.title}
