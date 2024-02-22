@@ -12,6 +12,7 @@ const authSlice = createSlice({
     isActive: false,
     image: null,
     email: null,
+    creationDate: null,
   },
   reducers: {
     fetchStart: (state) => {
@@ -50,6 +51,8 @@ const authSlice = createSlice({
     },
     sendResetPasswordToEmailSuccsess: (state, { payload }) => {
       state.currentUserId = payload.id;
+      state.email = payload?.email;
+      state.creationDate = payload?.creationDate;
     },
     fetchFail: (state) => {
       state.loading = false;

@@ -5,29 +5,35 @@ import LockIcon from "@mui/icons-material/Lock";
 import { object, string } from "yup";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import useAuthCall from "../hooks/useAuthCall";
 
 const ResetPassword = () => {
-  const { currentUserId } = useSelector((state) => state.auth);
-  const passwordShema = object({
+  const { currentUserId, email } = useSelector((state) => state.auth);
+  const { sendResetPasswordToEmail } = useAuthCall();
+
+  const handleSendResetPassword = () => {
+    sendResetPasswordToEmail(email);
+    setTime(120);
+  };
+
+  const passwordSchema = object({
     password: string()
-      .required("Bu alan boş kırakılamaz")
-      .max(6, "doğrulama şifresi 6 karakterden çok olamaz")
+      .required("Bu alan boş bırakılamaz")
+      .max(6, "doğrulama şifresi 6 karakterden fazla olamaz")
       .min(6, "doğrulama şifresi 6 karakterden az olamaz"),
   });
-  const [time, setTime] = useState(5);
 
+  const [time, SetTime] = useState();
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTime((prevTime) => {
-        if (prevTime === 0) {
-          clearInterval(intervalId);
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
+    // if (email) {
+    //   localStorage.setItem("items", JSON.stringify(items));
+    // }
+    // const intervalId = setInterval(() => {
+    //   setTime(time - 1);
+    // }, 1000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+    // return () => clearInterval(intervalId);
+  }, [time]);
 
   return (
     <Grid
@@ -46,7 +52,7 @@ const ResetPassword = () => {
       <Grid item xs={12}>
         <Formik
           initialValues={{ password: "" }}
-          validationSchema={passwordShema}
+          validationSchema={passwordSchema}
           onSubmit={(values, actions) => {
             // sendResetPasswordToEmail(values.email);
             actions.resetForm();
@@ -70,7 +76,19 @@ const ResetPassword = () => {
               >
                 <LockIcon sx={{ fontSize: "15rem", color: "#0277bd" }} />
                 {time > 0 ? (
-                  <Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "auto",
+                      width: "40rem",
+                      height: "40rem",
+                      bgcolor: "#eeeeee",
+                      gap: "2rem",
+                    }}
+                  >
                     <Typography variant="h6" color="#0277bd" width="18rem">
                       Kalan süre : {time}
                     </Typography>
@@ -102,9 +120,34 @@ const ResetPassword = () => {
                     </Button>
                   </Box>
                 ) : (
-                  <Box>
-                    <Typography>Yeniden deneyin </Typography>
-                    <Button> Sifreyi Sıfırla</Button>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "auto",
+                      width: "40rem",
+                      height: "40rem",
+                      bgcolor: "#eeeeee",
+                      gap: "5rem",
+                    }}
+                  >
+                    <Typography>
+                      E-mail adresine gönderilen şifreyi 2 dakika içerisinde
+                      girmelisiniz{" "}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      sx={{
+                        bgcolor: "#0277bd",
+                        color: "#e1f5fe",
+                        "&:hover": { bgcolor: "#f44336" },
+                      }}
+                    >
+                      Tekrar Dene
+                    </Button>
                   </Box>
                 )}
               </Box>

@@ -71,7 +71,7 @@ const useAuthCall = () => {
       const { data } = await axiosWithToken.post(`/auth/changepassword`, {
         email: email,
       });
-      console.log(data);
+      data.email = email;
       dispatch(sendResetPasswordToEmailSuccsess(data));
       notify("Email adresinize sıfırlama şifresi gönderildi ", "warning");
       navigate("/resetpassword");

@@ -164,11 +164,12 @@ module.exports = {
       { _id: currentUser._id },
       { recall_password: recall_password }
     );
+    const updatedAt = new Date();
     sendMail(req.body.email, recall_password);
-
     res.status(200).send({
       error: false,
       id: currentUser._id,
+      creationDate: updatedAt,
     });
   },
 };
