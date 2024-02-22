@@ -136,6 +136,14 @@ const Navbar = () => {
                   >
                     Profil
                   </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      logout();
+                    }}
+                  >
+                    Çıkış
+                  </MenuItem>
                 </Menu>
               </div>
             ) : (

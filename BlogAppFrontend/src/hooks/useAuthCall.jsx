@@ -4,6 +4,7 @@ import {
   loginSuccess,
   logoutSuccess,
   registerSuccess,
+  sendResetPasswordToEmailSuccsess,
 } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -63,7 +64,29 @@ const useAuthCall = () => {
       );
     }
   };
-  return { login, logout, register };
+  const sendResetPasswordToEmail = async (email) => {
+    dispatch(fetchStart());
+
+    try {
+      const { data } = await axiosWithToken.post(`/auth/changepassword`, {
+        email: email,
+      });
+      console.log(data);
+      dispatch(sendResetPasswordToEmailSuccsess(data));
+      notify("Email adresinize sıfırlama şifresi gönderildi ", "warning");
+      navigate("/resetpassword");
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail());
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Kayıt işleminde bir hata oldu. Lütfen tekrar deneyiniz",
+        "error"
+      );
+    }
+  };
+  return { login, logout, register, sendResetPasswordToEmail };
 };
 
 export default useAuthCall;

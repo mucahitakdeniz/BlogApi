@@ -9,13 +9,18 @@ import PrivateRouter from "./PrivateRouter";
 import Profile from "../pages/Profile";
 import NewBlog from "../pages/NewBlog";
 import MyBlog from "../pages/MyBlog";
+import ChangePassword from "../pages/ChangePassword";
+import SendResetPassword from "../pages/SendResetPassword";
+import ResetPassword from "../pages/ResetPassword";
 
 const AppRouter = () => {
-
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/changepassword" element={<ChangePassword />} />
+      <Route path="/resetpassword" element={<ResetPassword />} />
+      <Route path="/sendresetpassword" element={<SendResetPassword />} />
       <Route path="/" element={<Home />}>
         <Route index element={<Dashboard />} />
         <Route path="/about" element={<About />} />

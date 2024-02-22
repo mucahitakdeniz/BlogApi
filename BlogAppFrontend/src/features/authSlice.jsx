@@ -48,6 +48,9 @@ const authSlice = createSlice({
       state.image = payload?.image;
       state.email = payload.email;
     },
+    sendResetPasswordToEmailSuccsess: (state, { payload }) => {
+      state.currentUserId = payload.id;
+    },
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -61,5 +64,6 @@ export const {
   loginSuccess,
   logoutSuccess,
   registerSuccess,
+  sendResetPasswordToEmailSuccsess,
 } = authSlice.actions;
 export default authSlice.reducer;

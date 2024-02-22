@@ -7,7 +7,7 @@ const PrivateRouter = () => {
   const { currentUser } = useSelector((state) => state.auth);
 
   if (!currentUser) {
-    notify("You must be logged in to use this feature", "error");
+    notify("Bu işlemi yapabilmek için giriş yapmalısın", "error");
     return <Navigate to="/login" />;
   }
 

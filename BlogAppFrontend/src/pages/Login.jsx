@@ -124,7 +124,7 @@ const Login = () => {
                     ),
                   }}
                 />
-                <Link to="/forgotpassword">Şifrenini unuttunuz mu</Link>
+                <Link to="/sendresetpassword">Şifrenini unuttunuz mu</Link>
                 <Button variant="contained" type="submit">
                   Giriş
                 </Button>
