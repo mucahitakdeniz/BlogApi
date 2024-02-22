@@ -8,9 +8,8 @@ import { Avatar, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuthCall from "../hooks/useAuthCall";
-import SearchAppBar from "./SearchAppBar";
 
-const Navbar = ({ setSearch }) => {
+const Navbar = () => {
   const navigate = useNavigate();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -157,7 +156,6 @@ const Navbar = ({ setSearch }) => {
             )}
           </Box>
         </Toolbar>
-        <SearchAppBar setSearch={setSearch} />
       </AppBar>
     </Box>
   );

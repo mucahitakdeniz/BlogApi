@@ -68,7 +68,7 @@ const Cards = ({ blogsData }) => {
                 margin: "auto",
                 marginTop: "2rem",
                 borderRadius: "1rem",
-                boxShadow: "0 10px 18px rgba(1, 8, 4, 0.788)"
+                boxShadow: "0 5px 18px rgba(1, 8, 4, 0.788)"
               }}
               image={item.image}
               title={item.title}

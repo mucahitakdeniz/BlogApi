@@ -9,17 +9,15 @@ import PrivateRouter from "./PrivateRouter";
 import Profile from "../pages/Profile";
 import NewBlog from "../pages/NewBlog";
 import MyBlog from "../pages/MyBlog";
-import { useState } from "react";
 
 const AppRouter = () => {
-  const [search, setSearch] = useState(null);
 
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/" element={<Home setSearch={setSearch} />}>
-        <Route index element={<Dashboard search={search} />} />
+      <Route path="/" element={<Home />}>
+        <Route index element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="" element={<PrivateRouter />}>
           <Route path="profile" element={<Profile />} />
