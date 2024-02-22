@@ -39,7 +39,10 @@ const About = () => {
           Mücahit Akdeniz
         </Typography>
         <Typography variant="h6" color="dark" fontWeight="100">
-          Junior Frontend Developer
+          Full Stack Developer{" "}
+        </Typography>
+        <Typography variant="h6" color="dark" fontWeight="100">
+          mucahitakdeniz28@gmail.com{" "}
         </Typography>
 
         <CardActions>

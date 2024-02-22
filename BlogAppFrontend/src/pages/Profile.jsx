@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
 
 const Profile = () => {
-  const { currentUser, image } = useSelector((state) => state.auth);
+  const { currentUser, image,email } = useSelector((state) => state.auth);
 
   return (
     <Box
@@ -24,7 +24,7 @@ const Profile = () => {
           alignItems: "center",
           gap: "4vh",
           height: "45vh",
-          width: "40vh",
+          width: "30vh",
           padding: "12vh",
           boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
         }}
@@ -41,10 +41,19 @@ const Profile = () => {
             src={image}
           />
         ) : (
-          <Avatar> {currentUser.slice(0, 1).toLocaleUpperCase()}</Avatar>
+          <Avatar sx={{
+            bgcolor: deepOrange[500],
+            width: "15rem",
+            height: "15rem",
+            margin: "2rem auto",
+            fontSize:"5rem"
+          }}> {currentUser.slice(0, 4).toLocaleUpperCase()}</Avatar>
         )}
         <Typography variant="h3" color="dark" fontWeight="500">
           {currentUser}
+        </Typography>
+        <Typography variant="h3" color="dark" fontWeight="500">
+          {email}
         </Typography>
       </Card>
     </Box>

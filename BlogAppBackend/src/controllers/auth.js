@@ -33,6 +33,7 @@ module.exports = {
               token: token.token,
               user_id: user._id,
               user_name: user?.user_name,
+              email: user?.email,
               is_admin: user.is_admin,
               is_active: user.is_active,
               image: user.image || null,
@@ -52,6 +53,7 @@ module.exports = {
               is_admin: user.is_admin,
               image: user?.image || null,
               is_active: user.is_active,
+              email: user?.email,
             });
           }
         } else {

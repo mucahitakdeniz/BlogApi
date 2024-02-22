@@ -11,6 +11,7 @@ const authSlice = createSlice({
     isAdmin: false,
     isActive: false,
     image: null,
+    email: null,
   },
   reducers: {
     fetchStart: (state) => {
@@ -25,6 +26,7 @@ const authSlice = createSlice({
       state.isAdmin = payload?.is_admin;
       state.isActive = payload?.is_active;
       state.image = payload?.image;
+      state.email = payload.email;
     },
     logoutSuccess: (state) => {
       state.loading = false;
@@ -34,6 +36,7 @@ const authSlice = createSlice({
       state.isAdmin = null;
       state.isActive = null;
       state.image = null;
+      state.email = null;
     },
     registerSuccess: (state, { payload }) => {
       state.loading = false;
@@ -43,6 +46,7 @@ const authSlice = createSlice({
       state.isAdmin = payload?.is_admin;
       state.isActive = payload?.is_active;
       state.image = payload?.image;
+      state.email = payload.email;
     },
     fetchFail: (state) => {
       state.loading = false;

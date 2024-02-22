@@ -58,6 +58,8 @@ module.exports = {
         is_admin: data?.is_admin,
         is_active: data?.is_active,
         image: data?.image,
+        email: data?.email,
+
       });
     }
   },
