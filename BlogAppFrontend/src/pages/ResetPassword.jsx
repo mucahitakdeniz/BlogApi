@@ -6,15 +6,14 @@ import { object, string } from "yup";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import useAuthCall from "../hooks/useAuthCall";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
-  const { currentUserId, email } = useSelector((state) => state.auth);
+  const { currentUserId, email, creationDate } = useSelector(
+    (state) => state.auth
+  );
   const { sendResetPasswordToEmail } = useAuthCall();
-
-  const handleSendResetPassword = () => {
-    sendResetPasswordToEmail(email);
-    setTime(120);
-  };
+  const navigate = useNavigate();
 
   const passwordSchema = object({
     password: string()
@@ -22,17 +21,27 @@ const ResetPassword = () => {
       .max(6, "doğrulama şifresi 6 karakterden fazla olamaz")
       .min(6, "doğrulama şifresi 6 karakterden az olamaz"),
   });
+  const startTimeF = new Date(creationDate);
+  const startTime = startTimeF.getTime();
+  const currentTime = Date.now();
+  let timeDifference = Math.floor((currentTime - startTime) / 1000);
 
-  const [time, SetTime] = useState();
+  const [time, setTime] = useState(() => {
+    if (timeDifference < 120) {
+      return 120 - timeDifference;
+    } else {
+      return 0;
+    }
+  });
+  
   useEffect(() => {
-    // if (email) {
-    //   localStorage.setItem("items", JSON.stringify(items));
-    // }
-    // const intervalId = setInterval(() => {
-    //   setTime(time - 1);
-    // }, 1000);
-
-    // return () => clearInterval(intervalId);
+    const timer = setInterval(() => {
+      if (time > 0) {
+        setTime((prevTime) => prevTime - 1);
+      }
+    }, 1000);
+  
+    return () => clearInterval(timer);
   }, [time]);
 
   return (
@@ -135,7 +144,7 @@ const ResetPassword = () => {
                   >
                     <Typography>
                       E-mail adresine gönderilen şifreyi 2 dakika içerisinde
-                      girmelisiniz{" "}
+                      girmelisiniz
                     </Typography>
                     <Button
                       variant="contained"
@@ -145,6 +154,7 @@ const ResetPassword = () => {
                         color: "#e1f5fe",
                         "&:hover": { bgcolor: "#f44336" },
                       }}
+                      onClick={() => navigate("/sendresetpassword")}
                     >
                       Tekrar Dene
                     </Button>
