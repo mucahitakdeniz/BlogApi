@@ -54,6 +54,15 @@ const authSlice = createSlice({
       state.email = payload?.email;
       state.creationDate = payload?.creationDate;
     },
+    sendVerificationPasswordSuccsess: (state, { payload }) => {
+      state.token = payload.token;
+    },
+    cahangePaswordSuscess: (state) => {
+      state.currentUserId = null;
+      state.email = null;
+      state.creationDate = null;
+      state.token = null;
+    },
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -68,5 +77,7 @@ export const {
   logoutSuccess,
   registerSuccess,
   sendResetPasswordToEmailSuccsess,
+  sendVerificationPasswordSuccsess,
+  cahangePaswordSuscess,
 } = authSlice.actions;
 export default authSlice.reducer;

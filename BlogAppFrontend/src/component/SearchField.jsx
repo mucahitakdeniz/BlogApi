@@ -57,7 +57,7 @@ export default function SearchField({ setSearch, search }) {
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
-          value={search}
+          value={search || ""}
           onChange={(e) => handleChange(e)}
         />
         <ClearIcon

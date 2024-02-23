@@ -65,7 +65,7 @@ const SendResetPassword = () => {
                   placeholder="Email adresinizi giriniz"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.email}
+                  value={values.email || ""}
                   error={touched.email && Boolean(errors.email)}
                   helperText={errors.email}
                   sx={{ width: "18rem" }}

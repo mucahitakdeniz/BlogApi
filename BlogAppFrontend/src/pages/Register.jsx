@@ -5,20 +5,13 @@ import Avatar from "@mui/material/Avatar";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { Formik, Form } from "formik";
 import { Box, Button } from "@mui/material";
-import { useState } from "react";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { object, string } from "yup";
+import { object, string, ref } from "yup";
 import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCall";
 
 const Register = () => {
   const { register } = useAuthCall();
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
   const RegisterSchema = object({
     email: string()
       .email("Lütfen geçerli bir e-posta adresi giriniz!")
@@ -49,15 +42,10 @@ const Register = () => {
       .matches(/\d+/, "En az bir rakam içermelidir.")
       .matches(/[a-z]/, "En az bir küçük harf içermelidir.")
       .matches(/[A-Z]/, "En az bir büyük harf içermelidir.")
-      .matches(/[!,?{}><%&$#*£+-.]+/, "En az bir özel karekter içermelidir."),
+      .matches(/[!,?{}><%&$#*£+-.]+/, "En az bir özel karekter içermelidir.")
+      .equals([ref("password")], "Şifreler eşleşmiyor"),
   });
 
-  const togglePasswordVisibility = () => {
-    setShow(!show);
-  };
-  const togglePasswordVisibility2 = () => {
-    setShow2(!show2);
-  };
   return (
     <Container maxWidth="lg" sx={{ display: "flex", justifyContent: "center" }}>
       <Grid
@@ -205,7 +193,7 @@ const Register = () => {
 
                   <TextField
                     xs={12}
-                    type={show ? "text" : "password"}
+                    type="password"
                     name="password"
                     label="Password"
                     variant="outlined"
@@ -214,23 +202,10 @@ const Register = () => {
                     value={values.password}
                     error={touched.password && Boolean(errors.password)}
                     helperText={errors.password}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment sx={{}} position="end">
-                          <IconButton onClick={togglePasswordVisibility}>
-                            {show ? (
-                              <Visibility sx={{ color: "red" }} />
-                            ) : (
-                              <VisibilityOff x={{ color: "green" }} />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
                   />
                   <TextField
                     xs={12}
-                    type={show ? "text" : "password"}
+                    type="password"
                     name="password2"
                     label="Password 2"
                     variant="outlined"
@@ -239,19 +214,6 @@ const Register = () => {
                     value={values.password2}
                     error={touched.password2 && Boolean(errors.password2)}
                     helperText={errors.password2}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment sx={{}} position="end">
-                          <IconButton onClick={togglePasswordVisibility2}>
-                            {show2 ? (
-                              <Visibility sx={{ color: "red" }} />
-                            ) : (
-                              <VisibilityOff x={{ color: "green" }} />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
                   />
                   <Button variant="contained" type="submit">
                     GÖNDER

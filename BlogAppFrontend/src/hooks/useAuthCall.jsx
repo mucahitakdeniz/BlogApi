@@ -5,6 +5,8 @@ import {
   logoutSuccess,
   registerSuccess,
   sendResetPasswordToEmailSuccsess,
+  sendVerificationPasswordSuccsess,
+  cahangePaswordSuscess,
 } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -28,7 +30,7 @@ const useAuthCall = () => {
       notify(
         error?.response?.data.message
           ? error.response.data.message
-          : "Bir hata oldu. Lütfen tekrar deneyiniz",
+          : "Bir hata meydana geldi. Lütfen tekrar deneyiniz",
         "error"
       );
     }
@@ -42,7 +44,7 @@ const useAuthCall = () => {
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      notify("Bir hata oldu. Lütfen tekrar deneyiniz", "error");
+      notify("Bir hata meydana geldi. Lütfen tekrar deneyiniz", "error");
     }
   };
   const register = async (user) => {
@@ -59,7 +61,7 @@ const useAuthCall = () => {
       notify(
         error?.response?.data.message
           ? error.response.data.message
-          : "Kayıt işleminde bir hata oldu. Lütfen tekrar deneyiniz",
+          : "Kayıt işleminde bir hata meydana geldi. Lütfen tekrar deneyiniz",
         "error"
       );
     }
@@ -81,12 +83,61 @@ const useAuthCall = () => {
       notify(
         error?.response?.data.message
           ? error.response.data.message
-          : "Kayıt işleminde bir hata oldu. Lütfen tekrar deneyiniz",
+          : "Kayıt işleminde bir hata meydana geldi. Lütfen tekrar deneyiniz",
         "error"
       );
     }
   };
-  return { login, logout, register, sendResetPasswordToEmail };
+  const sendVerificationPassword = async (password, id) => {
+    dispatch(fetchStart());
+
+    try {
+      const { data } = await axiosWithToken.post(`/auth/changepassword/${id}`, {
+        recall_password: password,
+      });
+      dispatch(sendVerificationPasswordSuccsess(data));
+      notify("Doğrulama işlemi başarılı ", "success");
+      navigate("/changepassword");
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail());
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Doğrulama işleminde bir hata meydana. Lütfen tekrar deneyiniz",
+        "error"
+      );
+    }
+  };
+  const changePasword = async (password, id) => {
+    dispatch(fetchStart());
+
+    try {
+      const { data } = await axiosWithToken.put(`/users/${id}`, {
+        password: password,
+      });
+      dispatch(cahangePaswordSuscess(data));
+      notify("Şifreniz güncellendi ", "success");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail());
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Şifre değiştirme işleminde bir hata meydana. Lütfen tekrar deneyiniz",
+        "error"
+      );
+    }
+  };
+  return {
+    login,
+    logout,
+    register,
+    sendResetPasswordToEmail,
+    sendVerificationPassword,
+    changePasword,
+  };
 };
 
 export default useAuthCall;

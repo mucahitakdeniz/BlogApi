@@ -9,10 +9,10 @@ import useAuthCall from "../hooks/useAuthCall";
 import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
-  const { currentUserId, email, creationDate } = useSelector(
+  const { currentUserId, creationDate } = useSelector(
     (state) => state.auth
   );
-  const { sendResetPasswordToEmail } = useAuthCall();
+  const { sendVerificationPassword } = useAuthCall();
   const navigate = useNavigate();
 
   const passwordSchema = object({
@@ -33,14 +33,14 @@ const ResetPassword = () => {
       return 0;
     }
   });
-  
+
   useEffect(() => {
     const timer = setInterval(() => {
       if (time > 0) {
         setTime((prevTime) => prevTime - 1);
       }
     }, 1000);
-  
+
     return () => clearInterval(timer);
   }, [time]);
 
@@ -63,7 +63,7 @@ const ResetPassword = () => {
           initialValues={{ password: "" }}
           validationSchema={passwordSchema}
           onSubmit={(values, actions) => {
-            // sendResetPasswordToEmail(values.email);
+            sendVerificationPassword(values.password, currentUserId);
             actions.resetForm();
             actions.setSubmitting();
           }}
