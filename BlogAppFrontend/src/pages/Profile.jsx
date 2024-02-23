@@ -49,10 +49,10 @@ const Profile = () => {
             fontSize:"5rem"
           }}> {currentUser.slice(0, 4).toLocaleUpperCase()}</Avatar>
         )}
-        <Typography variant="h3" color="dark" fontWeight="500">
+        <Typography variant="h4" color="dark" fontWeight="500">
           {currentUser}
         </Typography>
-        <Typography variant="h3" color="dark" fontWeight="500">
+        <Typography variant="h5" color="dark" fontWeight="500">
           {email}
         </Typography>
       </Card>

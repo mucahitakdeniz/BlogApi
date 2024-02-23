@@ -1,4 +1,4 @@
- import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -60,6 +60,7 @@ const NewBlog = () => {
           id="title"
           type="text"
           variant="outlined"
+          value={newBlogInfo.title || ""}
           required
           onChange={handleChange}
         />
@@ -70,6 +71,7 @@ const NewBlog = () => {
           id="image"
           type="url"
           variant="outlined"
+          value={newBlogInfo.image || ""}
           required
           onChange={handleChange}
         />
@@ -87,7 +89,7 @@ const NewBlog = () => {
           >
             {categories?.map((item, i) => {
               return (
-                <MenuItem key={i} value={item._id}>
+                <MenuItem key={i} value={item._id || null}>
                   {item.name}
                 </MenuItem>
               );
@@ -126,6 +128,8 @@ const NewBlog = () => {
           id="content"
           type="text"
           variant="outlined"
+          value={newBlogInfo.content || ""}
+
           required
           multiline
           rows={4}
