@@ -12,12 +12,14 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import useCardsFn from "../hooks/useBlogsFn";
+import useCommentCall from "../hooks/useCommentCall";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EditModal from "./EditModal";
 
 const ReadMore = () => {
   const { likesBlog, readMore, deleteBlog } = useCardsFn();
+  const { getComment } = useCommentCall();
   const { id } = useParams();
   const card = useSelector((state) => state.card);
   const { currentUserId, isAdmin, currentUser } = useSelector(
@@ -30,6 +32,9 @@ const ReadMore = () => {
   };
   const hendleDelete = (id) => {
     deleteBlog(id);
+  };
+  const openComment = (id) => {
+    getComment(id);
   };
   const handleOpen = () => {
     setInfo({
@@ -66,7 +71,6 @@ const ReadMore = () => {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     readMore(id);
-    console.log("deneme");
   }, [id]);
 
   return (
@@ -89,7 +93,7 @@ const ReadMore = () => {
           width: "50%",
           padding: 1,
           borderRadius: "1rem",
-          boxShadow: "0 10px 18px rgba(14, 196, 38, 0.788)"
+          boxShadow: "0 10px 18px rgba(14, 196, 38, 0.788)",
         }}
       >
         <CardContent>
@@ -151,6 +155,7 @@ const ReadMore = () => {
             <Box sx={{ display: "flex" }}>
               <ChatBubbleOutlineIcon
                 sx={{ fontSize: "2.5rem", "&:hover": { cursor: "pointer" } }}
+                onClick={openComment(card.id)}
               />
               <Typography variant="h5" color="text.secondary">
                 {card.comment_count}
