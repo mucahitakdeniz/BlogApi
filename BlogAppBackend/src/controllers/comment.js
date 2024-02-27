@@ -12,9 +12,9 @@ module.exports = {
        */
 
     let filter = {};
-    if (req.params.blog_id) {
+    if (req.params.id) {
       filter = {
-        blog_id: req.params?.blog_id,
+        blog_id: req.params.id,
       };
     }
     const data = await Comment.find(filter).sort({

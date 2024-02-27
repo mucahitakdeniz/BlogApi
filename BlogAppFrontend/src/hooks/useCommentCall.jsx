@@ -6,29 +6,63 @@ import {
   deleteCommentSuccess,
 } from "../features/commentSlice";
 import useAxios from "./useAxios";
+import { notify } from "../helper/sweetaAlert";
 
 const useCommentCall = () => {
-  const { axiosWithToken } = useAxios;
+  const { axiosWithToken } = useAxios();
   const dispatch = useDispatch();
 
-  const getComment = async (blog_id) => {
+  const getComment = async (id) => {
     dispatch(fetchCommentStart());
     try {
-      const data = axiosWithToken.get(`/comments/${blog_id}`);
-      dispatch(getCommentSuccess(data));
-    } catch (error) {}
-    dispatch(fetchCommentFail());
+      const { data } = await axiosWithToken.get(`/comments/${id}`);
+      console.log("data :", data);
+      dispatch(getCommentSuccess(data.data));
+    } catch (error) {
+      dispatch(fetchCommentFail());
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Bir hata oluştu. Lütfen tekrar deneyiniz",
+        "error"
+      );
+      console.log(error);
+    }
+  };
+  const createComment = async (comment) => {
+    dispatch(fetchCommentStart());
+    try {
+      const { data } = await axiosWithToken.post(`/comments`, comment);
+      dispatch(deleteCommentSuccess());
+    } catch (error) {
+      dispatch(fetchCommentFail());
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Bir hata oluştu. Lütfen tekrar deneyiniz",
+        "error"
+      );
+      console.log(error);
+    }
   };
   const deleteComment = async (id) => {
     dispatch(fetchCommentStart());
     try {
-      axiosWithToken.delete(`/comments/${id}`);
+      await axiosWithToken.delete(`/comments/${id}`);
       dispatch(deleteCommentSuccess());
-    } catch (error) {}
-    dispatch(fetchCommentFail());
+    } catch (error) {
+      dispatch(fetchCommentFail());
+      notify(
+        error?.response?.data.message
+          ? error.response.data.message
+          : "Bir hata oluştu. Lütfen tekrar deneyiniz",
+        "error"
+      );
+      console.log(error);
+    }
   };
 
-  return { getComment, deleteComment };
+  return { getComment, deleteComment, createComment };
 };
 
 export default useCommentCall;

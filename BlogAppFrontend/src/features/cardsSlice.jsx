@@ -25,7 +25,6 @@ const cardsSlice = createSlice({
     },
 
     readCards: (state, { payload }) => {
-      console.log(payload);
       state.loading = false;
       state.id = payload?._id;
       state.title = payload?.title;

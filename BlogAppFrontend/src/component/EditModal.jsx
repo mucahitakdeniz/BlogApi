@@ -109,7 +109,7 @@ export default function EditModal({ open, info, setInfo, handleClose }) {
               label="status"
               id="status-select"
               name="status"
-              value={info.status || ""}
+              value={info?.status || ""}
               required
               onChange={handleChange}
             >

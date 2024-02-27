@@ -35,7 +35,10 @@ const ReadMore = () => {
   };
   const openComment = (id) => {
     getComment(id);
+
   };
+  const [info, setInfo] = useState();
+
   const handleOpen = () => {
     setInfo({
       title: card?.title,
@@ -59,14 +62,6 @@ const ReadMore = () => {
       category_id: "",
     });
   };
-  const [info, setInfo] = useState({
-    title: card?.title,
-    image: card?.image,
-    content: card?.content,
-    _id: card?.id,
-    status: card?.status,
-    category_id: card?.category?._id,
-  });
 
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -155,7 +150,7 @@ const ReadMore = () => {
             <Box sx={{ display: "flex" }}>
               <ChatBubbleOutlineIcon
                 sx={{ fontSize: "2.5rem", "&:hover": { cursor: "pointer" } }}
-                onClick={openComment(card.id)}
+                onClick={()=>openComment(card.id)}
               />
               <Typography variant="h5" color="text.secondary">
                 {card.comment_count}
