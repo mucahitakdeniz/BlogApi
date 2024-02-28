@@ -188,8 +188,8 @@ const ReadMore = () => {
             )}
           </Box>
         </CardActions>
+        <Comments blog_id={card.id} />
       </Card>
-      <Comments blog_id={card.id} />
     </Container>
   );
 };
