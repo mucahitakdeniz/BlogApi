@@ -8,7 +8,6 @@ const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
@@ -33,10 +32,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
 export default function SearchField({ setSearch, search }) {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
+
+  const isClearIconDisabled = !search;
 
   return (
     <Box
@@ -61,7 +63,12 @@ export default function SearchField({ setSearch, search }) {
           onChange={(e) => handleChange(e)}
         />
         <ClearIcon
-          sx={{ "&:hover": { color: "red", cursor: "pointer" } }}
+          type="button"
+          sx={{
+            "&:hover": { color: "red", cursor: isClearIconDisabled ? "not-allowed" : "pointer" },
+            opacity: isClearIconDisabled ? "0.5" : "1",
+            pointerEvents: isClearIconDisabled ? "none" : "auto",
+          }}
           onClick={() => setSearch("")}
         />
       </Search>

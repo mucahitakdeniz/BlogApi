@@ -8,7 +8,7 @@ import SearchField from "./SearchField";
 const Dashboard = () => {
   const { blogsData } = useSelector((state) => state.blogs);
   const { getBlogs } = useBloggsFn();
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState();
 
   const filterBlogs = blogsData.filter(
     (blog) =>

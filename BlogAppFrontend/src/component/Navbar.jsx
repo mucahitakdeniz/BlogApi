@@ -24,7 +24,10 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const handleLogOut = () => {
+    navigate("/");
+    logout();
+  };
   return (
     <Box sx={{ width: "100%", height: "8rem" }}>
       <AppBar
@@ -138,8 +141,7 @@ const Navbar = () => {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
-                      handleClose();
-                      logout();
+                      handleLogOut()
                     }}
                   >
                     Çıkış

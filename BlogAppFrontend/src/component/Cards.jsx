@@ -44,7 +44,7 @@ const Cards = ({ blogsData }) => {
     }
   };
   return (
-    <Grid container spacing={7} marginTop={4} marginBottom={7} >
+    <Grid container spacing={7} marginTop={4} marginBottom={7}>
       {blogsData?.map((item) => (
         <Grid item key={item._id} xs={12} sm={6} md={4}>
           <Card
@@ -56,24 +56,24 @@ const Cards = ({ blogsData }) => {
               boxShadow: "5px 10px 18px rgba(3, 2, 2, 0.788)",
               display: "flex",
               flexDirection: "column",
-              marginRight:"1rem"
-              
+              marginRight: "1rem",
             }}
           >
             <CardMedia
               sx={{
                 width: "100%",
-                height: "50%",
+                height: "100%",
                 objectFit: "cover",
                 margin: "auto",
-                marginTop: "2rem",
+                marginBottom: "1rem",
                 borderRadius: "1rem",
-                boxShadow: "0 5px 18px rgba(1, 8, 4, 0.788)"
+                boxShadow: "0 10px 18px rgba(3, 2, 2, 0.788)",
               }}
               image={item.image}
               title={item.title}
               component="img"
             />
+
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 {item.title}
@@ -127,7 +127,8 @@ const Cards = ({ blogsData }) => {
                     sx={{
                       "&:hover": {
                         cursor: "pointer",
-                      },fontSize: "2rem"
+                      },
+                      fontSize: "2rem",
                     }}
                     onClick={() => handleComment(item._id)}
                   />
@@ -136,7 +137,7 @@ const Cards = ({ blogsData }) => {
                   </Typography>
                 </Box>
                 <Box sx={{ display: "flex" }}>
-                  <RemoveRedEyeIcon sx={{fontSize: "2rem",}}/>
+                  <RemoveRedEyeIcon sx={{ fontSize: "2rem" }} />
                   <Typography variant="body3" color="text.secondary">
                     {item.post_views}
                   </Typography>
@@ -146,7 +147,7 @@ const Cards = ({ blogsData }) => {
                 <Button
                   sx={{
                     backgroundColor: "lightgreen",
-                    marginLeft: "5rem",
+                    marginLeft: "3rem",
                     "&:hover": {
                       backgroundColor: "lightsalmon",
                       color: "black",
