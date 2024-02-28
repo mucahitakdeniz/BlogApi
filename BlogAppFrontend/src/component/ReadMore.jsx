@@ -4,7 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box, Button, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -12,14 +12,13 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import useCardsFn from "../hooks/useBlogsFn";
-import useCommentCall from "../hooks/useCommentCall";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EditModal from "./EditModal";
+import Comments from "./Comment";
 
 const ReadMore = () => {
   const { likesBlog, readMore, deleteBlog } = useCardsFn();
-  const { getComment } = useCommentCall();
   const { id } = useParams();
   const card = useSelector((state) => state.card);
   const { currentUserId, isAdmin, currentUser } = useSelector(
@@ -32,10 +31,6 @@ const ReadMore = () => {
   };
   const hendleDelete = (id) => {
     deleteBlog(id);
-  };
-  const openComment = (id) => {
-    getComment(id);
-
   };
   const [info, setInfo] = useState();
 
@@ -74,7 +69,9 @@ const ReadMore = () => {
         marginTop: "2rem",
         marginBottom: "2rem",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "1rem",
       }}
     >
       <EditModal
@@ -150,7 +147,7 @@ const ReadMore = () => {
             <Box sx={{ display: "flex" }}>
               <ChatBubbleOutlineIcon
                 sx={{ fontSize: "2.5rem", "&:hover": { cursor: "pointer" } }}
-                onClick={()=>openComment(card.id)}
+                onClick={() => window.innerHeight}
               />
               <Typography variant="h5" color="text.secondary">
                 {card.comment_count}
@@ -192,6 +189,7 @@ const ReadMore = () => {
           </Box>
         </CardActions>
       </Card>
+      <Comments blog_id={card.id} />
     </Container>
   );
 };

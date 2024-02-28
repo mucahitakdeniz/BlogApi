@@ -16,16 +16,8 @@ const useCommentCall = () => {
     dispatch(fetchCommentStart());
     try {
       const { data } = await axiosWithToken.get(`/comments/${id}`);
-      console.log("data :", data);
       dispatch(getCommentSuccess(data.data));
     } catch (error) {
-      dispatch(fetchCommentFail());
-      notify(
-        error?.response?.data.message
-          ? error.response.data.message
-          : "Bir hata oluştu. Lütfen tekrar deneyiniz",
-        "error"
-      );
       console.log(error);
     }
   };
@@ -34,6 +26,7 @@ const useCommentCall = () => {
     try {
       const { data } = await axiosWithToken.post(`/comments`, comment);
       dispatch(deleteCommentSuccess());
+      notify("Yorum yaptının için teşekkürler", "success");
     } catch (error) {
       dispatch(fetchCommentFail());
       notify(

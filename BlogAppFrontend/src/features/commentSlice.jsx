@@ -17,7 +17,6 @@ const commentSlace = createSlice({
       state.error = true;
     },
     getCommentSuccess: (state, { payload }) => {
-      console.log(payload);
       state.loading = false;
       state.comments = payload;
     },
